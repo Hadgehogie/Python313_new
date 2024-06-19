@@ -11,4 +11,4 @@ for x in tpl:
         pass
     else:
         lst.append(x)
-        print("Количество", x, "=", tpl.count(x))gi
+        print("Количество", x, "=", tpl.count(x))
