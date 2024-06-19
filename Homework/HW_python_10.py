@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Выведите статистику частности символов в кортеже:
 
 num = input("Введите по порядку, без пробелов, элементы кортежа: ")
@@ -12,22 +11,4 @@ for x in tpl:
         pass
     else:
         lst.append(x)
-        print("Количество", x, "=", tpl.count(x))
-
-=======
-# Выведите статистику частности символов в кортеже:
-
-num = input("Введите по порядку, без пробелов, элементы кортежа: ")
-
-tpl = tuple(num)
-print(tpl)
-
-lst = []
-for x in tpl:
-    if x in lst:
-        pass
-    else:
-        lst.append(x)
-        print("Количество", x, "=", tpl.count(x))
-
->>>>>>> 90acaeb783d17b918ab0694acfc39f24bb4480e2
+        print("Количество", x, "=", tpl.count(x))gi
