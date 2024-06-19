@@ -1,7 +1,7 @@
 # -----------------------------------------------------
 # Введение
 # import random
-import random
+# import random
 
 # name = "Alina"  # Инициация переменной
 # print("Hello,", name)
@@ -1503,4 +1503,4 @@ import random
 #         city_name, city_population = city
 #         print("\tГород:", city_name, "население =", city_population)
 
-
+print("Some random changes")
