@@ -1796,3 +1796,175 @@
 # a = [1, 2, 3]
 # n = a.pop(0)
 # print(n)  # 1
+
+# d = {'a': 1, 'b': 2, 'c': 3}
+# d1 = {'r': 7, 'q': 40}
+#
+# # d2 = d + d1  # TypeError
+# # print(d)
+# d.update(d1)
+# # d2 = {'a': 20, 'b': 9}
+# d2 = [('a', 20), ('b', 9)]
+# d.update(d2)
+# print(d)  # {'a': 1, 'b': 2, 'c': 3, 'r': 7, 'q': 40}
+# # {'a': 20, 'b': 9, 'c': 3, 'r': 7, 'q': 40}
+
+# x = {'a': 1, 'b': 2}
+# y = {'b': 3, 'c': 4}
+#
+# # z = {}
+# # z.update(x)
+# # z.update(y)
+#
+# # z = x.copy()
+# # z.update(y)
+#
+# z = x | y
+# print(z)
+
+# a = {
+#     'first': {
+#         1: 'one',
+#         2: 'two',
+#         3: 'three'
+#     },
+#     'second': {
+#         4: 'four',
+#         5: 'five'
+#     }
+# }
+# print(a)
+# for x in a:
+#     print(x)
+#     # print(a[x])
+#     for y in a[x]:
+#         print('\t', y, ': ', a[x][y], sep='')
+
+# sales = {'John': {'N': 3056, 'S': 8463, 'E': 8441, 'W': 2694},
+#          'Tom': {'N': 4832, 'S': 6786, 'E': 4737, 'W': 3612},
+#          'Anne': {'N': 5239, 'S': 4802, 'E': 5820, 'W': 1859},
+#          'Fiona': {'N': 3904, 'S': 3645, 'E': 8821, 'W': 2451}}
+#
+# for x in sales:
+#     print(x)
+#     for y in sales[x]:
+#         print('\t', y, ': ', sales[x][y], sep='')
+#
+# person = input("Name: ")
+# region = input("Region: ")
+# print(sales[person][region])
+# new_data = int(input("New data: "))
+#
+# sales[person][region] = new_data
+# print(sales[person])
+
+# d = {'N': 3056, 'S': 8463, 'E': 8441, 'W': 2694}
+# d = {value: key for key, value in d.items()}
+# print(d)
+#
+# d = {'N': 3056, 'S': 8463, 'E': 8441, 'W': 2694}
+# d.update({value: key for key, value in d.items()})
+# print(d)
+
+# d = {'N': 1, 'S': 2, 'E': 3, 'W': 4}
+# # new_d = {k: v for k, v in d.items() if v <= 2}
+# for i in range(2):
+#     print('key:', list(d.items())[i][0], 'value:', list(d.items())[i][1])
+
+# a = ["one", 1, 2, 3, "two", 10, 20, "three", 15, 36, 60, "four", -20]
+#
+# d = {}
+# current_key = ''
+#
+# for i in a:
+#     if type(i) is str:
+#         d[i] = []
+#         current_key = i
+#     else:
+#         d[current_key].append(i)
+#
+# for i in range(len(a)):
+#     if type(a[i]) is str:
+#         d[a[i]] = []
+#         for j in range(i + 1, len(a)):
+#             if type(a[j]) is int:
+#                 d[a[i]].append(a[j])
+#             else:
+#                 break
+#
+# print(d)
+
+# print(list(d.items()))  # [(1, 'one'), (2, 'two'), (3, 'three')]
+# d = dict(zip([1, 2, 3, 4, 5], ['one', 'two', 'three']))
+# print(d)  # {1: 'one', 2: 'two', 3: 'three'}
+#
+# a = [1, 2, 3]
+# b = ['one', 'two', 'three']
+# f = {k: v for k, v in zip(a, b)}
+# print(f)  # {1: 'one', 2: 'two', 3: 'three'}
+
+# a = [1, 2, 3]
+# b = ['one', 'two', 'three']
+# c = [4.5, 7.4, 9.6]
+# # c = zip(a, b)
+# # print(c)  # <zip object at 0x000002E463372E80>
+#
+# # c = tuple(zip(a, b))
+# # d = list(zip(a, b))
+# # e = set(zip(a, b))
+# # print(c)  # ((1, 'one'), (2, 'two'), (3, 'three'))
+# # print(d)  # [(1, 'one'), (2, 'two'), (3, 'three')]
+# # print(e)  # {(2, 'two'), (1, 'one'), (3, 'three')}
+#
+# # c = list(zip(a, ))
+# # print(c)
+#
+# d = list(zip(a, b, c))
+# print(d)  # [(1, 'one', 4.5), (2, 'two', 7.4), (3, 'three', 9.6)]
+
+# d1 = {'name': 'Igor', 'last_name': 'Petrov', 'job': 'Consultant'}
+# d2 = {'name': 'Irina', 'last_name': 'Irisova', 'job': 'Manager'}
+#
+# for (k1, v1), (k2, v2) in zip(d1.items(), d2.items()):
+#     print(k1, '->', v1)
+#     print(k2, '->', v2)
+
+# d = [(1, 'one'), (2, 'two'), (3, 'three')]
+# a, b = zip(*d)
+# print(a)  # (1, 2, 3)
+# print(b)  # ('one', 'two', 'three')
+
+
+a = ['two', 'one', 'three']
+b = [3, 2, 1]
+
+# d = dict(zip(a, b))
+# print(d)
+# d1 = sorted(d.items())
+# print(d1)  # [('one', 2), ('three', 1), ('two', 3)]
+# print(dict(d1))  # {'one': 2, 'three': 1, 'two': 3}
+
+# d = list(zip(a, b))
+# print(d)
+# d.sort()
+# print(d)  # [('one', 2), ('three', 1), ('two', 3)]
+# print(dict(d))  # {'one': 2, 'three': 1, 'two': 3}
+
+# one = {'apple': 0.45, 'orange': 0.35}
+# two = {'pepper': 0.2, 'onion': 0.55}
+# print({**one, **two})  # {'apple': 0.45, 'orange': 0.35, 'pepper': 0.2, 'onion': 0.55}
+#
+# # print({**one})  # Распаковка словаря {'apple': 0.45, 'orange': 0.35}
+#
+# for k, v in {**one, **two}.items():
+#     print(k, '->', v)
+
+# data = ['red', 'green', 'blue']
+# num = 1
+# for val in data:
+#     print(num, ") ", val, sep='')
+#     num += 1
+#
+# print()
+# for num, val in enumerate(data, 1):
+#     print(num, ") ", val, sep='')
