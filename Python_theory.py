@@ -1641,4 +1641,158 @@
 
 
 # -----------------------------------------------------
-# Словари
+# Словари (dict)
+# Ключи: int, str, tuple, bool (неизменяемые)
+# Значения: любой тип данных
+
+# lst = [1, 2, 3]
+# d = {'one': 1, 'two': 2, 'three': 3, 4: 'four'}
+# lst[0] = 10
+# print(lst[0])  # 10
+# d['one'] = 10
+# print(d['one'])  # 10
+# print(d[4])  # four
+
+# d = {'one': 1, 'two': 2}
+# print(d)
+# print(type(d))  # dict
+#
+# d1 = dict({'one': 1, 'two': 2, 4: 'four'})
+# d2 = dict(one=1, two=2, four='four')
+# print(d1)
+# print(type(d1))  # dict
+# print(d2)
+# print(type(d2))  # dict
+
+# # d = {0: 1, 'two': 2, 1: 45, (1, 2.3): 'tuple', True: [1, 2, 7], False: 'hehe'}
+# # {0: 'hehe', 'two': 2, 1: [1, 2, 7], (1, 2.3): 'tuple}
+# d = {0: 1, 'two': 2, (1, 2.3): 'tuple', True: [1, 2, 7]}
+# print(d)
+# print(d[True][1])  # 2
+# print(d[(1, 2.3)])  # tuple
+
+# lst = [1, 2, 3]
+# d = dict(lst)  # TypeError
+
+# lst = [('one', 1), ['two', 2], ['three', 3]]
+# d = dict(lst)
+# print(d)  # {'one': 1, 'two': 2, 'three': 3}
+
+# d = {a: a ** 2 for a in range(7)}
+# print(d, type(d))  # dict
+
+# d = {'one': 1, 'two': 2, 'four': 4}
+
+# print('one' in d)  # True
+# print(1 in d)  # False
+
+# key = 'four'
+# del d[key]
+
+# key = 'four1'
+# if key in d:
+#     del d[key]
+
+# key = 'four1'
+# try:
+#     del d[key]
+# except KeyError:
+#     print("There's no such key in this dictionary")
+#
+#
+# for i in d:
+#     print(i, '->', d[i])
+
+# d = {'x1': 3, 'x2': 7, 'x3': 5, 'x4': -1}
+# print(d, end='\n\n')
+# res = 1
+# for i in d:
+#     res *= d[i]
+# print(res)
+
+# orig = {i: input("-> ") for i in range(1, 5)}
+# print(orig)
+# exc = int(input("Какой элемент исключить: "))
+# try:
+#     del orig[exc]
+#     print(orig)
+# except KeyError:
+#     print("Пожалуйста, выберите существующий элемент")
+
+# myDict = {'x1': 3, 'x2': 7, 'x3': 5, 'x4': -1}
+# print(len(myDict))  # 4
+# print(min(myDict))  # x1
+#
+# myDict1 = {3: 'x1', 7: 'x2', 5: 'x3', -1: 'x4'}
+# print(sum(myDict1))  # 14
+
+# goods = {
+#     '1': ['Core-i3-4330', 9, 4500],
+#     '2': ['Core-i5-4670K', 3, 8500],
+#     '3': ['AMD FX-6300', 6, 3700],
+#     '4': ['Pentium 63220', 8, 2100],
+#     '5': ['Core-i5-34500', 5, 6400]
+# }
+# for i in goods:
+#     print(i, ') ', goods[i][0], ' - ', goods[i][1], ' шт. по ', goods[i][2], 'руб', sep='')
+#
+# while True:
+#     num = input("№: ")
+#     if num != '0':
+#         try:
+#             goods[num][1] = int(input('Количество: '))
+#         except KeyError:
+#             pass
+#     else:
+#         break
+#
+# for i in goods:
+#     print(i, ') ', goods[i][0], ' - ', goods[i][1], ' шт. по ', goods[i][2], 'руб', sep='')
+
+# d = {'a': 1, 'b': 2, 'c': 3}
+#
+# print(d.keys())  # список ключей
+# print(d.values())  # список значений
+# print(d.items())  # список ключей и значений (кортежи)
+#
+# # for i in d.values():
+# #     print(i)  # 1 2 3
+# #
+# # for i in d.items():
+# #     print(i)  # ('a', 1) ('b', 2) ('c', 3)
+# #
+# # for i, j in d.items():
+# #     print(i, '->', j)
+#
+# print(list(d))  # список ключей
+# print(list(d.values()))  # список значений
+# print(list(d.items()))  # список ключей и значений (кортежи)
+
+# d = {'a': 1, 'b': 2, 'c': 3}
+#
+# # # d2 = d
+# # d2 = d.copy()
+# # print('d:', d, id(d))
+# # print('d2:', d2, id(d2))
+# #
+# # d2['a'] = 5
+# # d['e'] = 7
+# # print('d:', d, id(d))
+# # print('d2:', d2, id(d2))
+# #
+# # d.clear()  # очищает тот же словарь
+# # print('d:', d, id(d))
+# # print('d2:', d2, id(d2))
+#
+# # # print(d['e'])  # KeyError
+# # value = d.get('e', "There's no such key")  # None
+# # print(value)  # 2
+# # item = d.pop('b')  # обязательно значение
+# # item = d.pop('e', "there's no such key")  # KeyError
+# item = d.popitem()
+# print(item)  # 2 / there's no such key / ('c', 3)
+# print(d)  # {'a': 1, 'c': 3} / {'a': 1, 'b': 2, 'c': 3} / {'a': 1, 'b': 2}
+#
+# a = [1, 2, 3]
+# n = a.pop(0)
+# print(n)  # 1
