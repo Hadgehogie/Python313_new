@@ -1935,8 +1935,8 @@
 # print(b)  # ('one', 'two', 'three')
 
 
-a = ['two', 'one', 'three']
-b = [3, 2, 1]
+# a = ['two', 'one', 'three']
+# b = [3, 2, 1]
 
 # d = dict(zip(a, b))
 # print(d)
@@ -1968,3 +1968,160 @@ b = [3, 2, 1]
 # print()
 # for num, val in enumerate(data, 1):
 #     print(num, ") ", val, sep='')
+
+
+# -----------------------------------------------------
+# Функции (func) - *args, **kwargs
+# * - распаковка кортежа
+
+# a = [1, 2, 3]
+# b = [*a, 4, 5, 6]  # [1, 2, 3, 4, 5, 6]
+# print(b)
+
+# def func(*args):
+#     # print(args)
+#     # print(type(args))
+#     # print()
+#     return args
+#
+#
+# print(func(2))
+# print(func(2, 3, 4, 'abc'))
+# print(func())  # ()
+
+# def summa(*params):
+#     res = 0
+#     for i in params:
+#         res += i
+#     return res
+#
+#
+# print(summa(1, 2, 3, 4, 5, 6, 7, 8, 9))
+# print(summa(3, 4, 5))
+
+# def my_dict(*args):
+#     return {i: i for i in args}
+#
+#
+# print(my_dict(1, 2, 3, 4))
+# print(my_dict('grey', (2, 17), 3.11, -4))
+
+# def mean(*args):
+#     print(sum(args) / len(args))
+#     res = []
+#     for i in args:
+#         if i < (sum(args) / len(args)):
+#             res.append(i)
+#     return res
+#
+#
+# print(mean(1, 2, 3, 4, 5, 6, 7, 8, 9))
+# print(mean(3, 6, 1, 9, 5))
+
+# def func(a, *args):
+#     return a, args
+#
+#
+# print(func(1))  # (1, ())
+# print(func(1, 2, 3, 4, 5, 6))  # (1, (2, 3, 4, 5, 6))
+
+# def print_score(student, *scores):
+#     print("Student name:", student)
+#     for score in scores:
+#         print(score)
+#
+#
+# print_score("Irina", 5, 4, 3, 2, 5)
+# print_score("Igor", 5, 4, 2, 3, 4)
+# print_score("Lev")
+
+# def func(**kwargs):
+#     return kwargs
+#
+#
+# print(func(a=1, b=2, c=3))
+# print(func())
+# print(func(d=9))
+
+# def intro(**data):
+#     for k, v in data.items():
+#         print(k, '->', v)
+#     print()
+#
+#
+# intro(name='Irina', surname='Reznikova', age=22)
+# intro(name='Igor', surname='Berukov', email='igor@mail.ru', age=25, phone='8(800)555-35-35')
+
+# def db(**kwargs):
+#     my_dict.update(kwargs)
+#     print("Inside the function:", id(my_dict))
+#
+#
+# my_dict = {'one': 'first'}
+# # print(id(my_dict))
+# db(k1=22, k2=31, k3=11, k4=91)
+# db(name='Bob', age=31, weight=61, eyes_color='grey')
+# # print(id(my_dict))
+# print(my_dict)
+
+# def func(a, b, *args, d, e, **kwargs):
+#     return a, b, args, e, kwargs, d
+#
+#
+# print(func(5, 5, 7, 9, 3, k1=22, k2=31, d=55, e=100))
+
+
+# -----------------------------------------------------
+# Области видимости (onsets)
+# LEGB (Local, Enclosed, Global, Built-in)
+
+# name = 'Tom'
+#
+#
+# def hi():
+#     global name
+#     name = 'Sam'
+#     surname = 'Johnson'
+#     print('Hello', name, surname)
+#
+#
+# def bye():
+#     print('Good bye', name)
+#
+#
+# hi()
+# bye()
+# print(name)
+# print("Global onset:", id(name))
+
+# i = 5
+#
+#
+# def func(arg=i):
+#     print(arg)
+#
+#
+# i = 6
+# func()  # 5
+
+# x = 4
+#
+#
+# def add_five(a):
+#     # x = 2
+#
+#     def add_some():
+#         # x = 1
+#         print('x =', x)
+#         return a + x
+#     return add_some()
+#
+#
+# print(add_five(5))
+
+# import builtins
+#
+# name = dir(builtins)
+#
+# for i in name:
+#     print(i)
