@@ -2125,3 +2125,250 @@
 #
 # for i in name:
 #     print(i)
+
+# def outer(who):
+#     def inner():
+#         print("Hello,", who)
+#
+#     inner()
+#
+#
+# outer("World!")
+
+# def fun1():
+#     a = 6
+#
+#     def fun2(b):
+#         a = 4
+#         print(a + b)
+#
+#     print("a:", a)
+#     fun2(4)
+#
+#
+# fun1()
+
+# x = 25
+#
+#
+# def fn():
+#     global t  # выводит переменную в глобальную ОВ
+#     a = 30
+#
+#     def inner():
+#         nonlocal a  # выводит переменную на уровень выше
+#         a = 35
+#         print('a:', a)
+#
+#     inner()
+#     t = a
+#
+#
+# fn()
+# c = x + t
+# print(c)
+
+# x = 5
+#
+#
+# def fn1():
+#     x = 25
+#
+#     def fn2():
+#         x = 33
+#
+#         def fn3():
+#             nonlocal x
+#             x = 55
+#
+#         fn3()
+#         print('fn2, x =', x)  # 33 -> 55
+#
+#     fn2()
+#     print('fn1, x =', x)  # 25
+#
+#
+# fn1()
+
+# def outer(a1, b1, a2, b2):
+#     a = 0  # 1
+#     b = 0  # 7
+#
+#     def inner():
+#         nonlocal a, b
+#         a = a1 + a2
+#         b = b1 + b2
+#
+#     inner()
+#     return [a, b]
+#
+#
+# res = outer(2, 3, -1, 4)
+# print(res)  # [0, 0] -> [1, 7]
+
+
+# -----------------------------------------------------
+# Замыкание (одна функция возвращает другую без ее вызова)
+
+# def outer(n):
+#     def inner(x):
+#         return n + x
+#
+#     return inner
+#
+#
+# item1 = outer(5)  # function inner
+# print(item1(10))  # inner(x) -> 15
+#
+# item2 = outer(5)
+# print(item2(1))  # 6
+#
+# # print(outer(20)(5))  # 25
+
+# def func1():
+#     a = 1
+#     b = 'line'
+#     c = [1, 2, 3]
+#
+#     def func2():
+#         nonlocal a, b
+#         c.append(4)
+#         a += 1
+#         b += '_new'
+#         return a, b, c
+#
+#     return func2
+#
+#
+# func = func1()
+# print(func())
+
+# def func(city):
+#     s = 0
+#
+#     def inner():
+#         nonlocal s
+#         s += 1
+#         print(city, s)
+#
+#     return inner
+#
+#
+# res1 = func('Москва')
+# res1()
+# res1()
+# res2 = func('Сочи')
+# res2()
+# res2()
+# res2()
+# res1()
+
+
+# -----------------------------------------------------
+# Lambda (анонимные функции)
+
+# print((lambda x, y: x + y)(1, 2))  # 3
+#
+# func = lambda x, y: x + y  # есть имя => def
+# print(func(1, 2))
+# print(func('a', 'b'))
+
+# print((lambda x, y: x ** 2 + y ** 2)(2, 5))  # 29
+# print((lambda x=2, y=5: x ** 2 + y ** 2)(1, 7))  # 50
+
+# print((lambda *args: args)(1, 2, 3, 4, 5))
+
+# y = (
+#     lambda x: x * 2,
+#     lambda x: x * 3,
+#     lambda x: x * 4
+# )
+#
+# for i in y:
+#     print(i('abc__'))
+
+# def outer(n):
+#     def inner(x):
+#         return x + n
+#
+#     return inner
+#
+#
+# f = outer(5)
+# print(f(10))  # 15
+#
+#
+# def outer1(n):
+#     return lambda x: x + n
+#
+#
+# f1 = outer1(5)
+# print(f1(10))  # 15
+#
+#
+# outer2 = lambda n: lambda x: x + n
+# f1 = outer2(5)
+# print(f1(10))  # 15
+#
+#
+# print((lambda n: lambda x: x + n)(5)(10))  # 15
+
+# print((lambda a: lambda b: lambda c: a + b + c)(2)(4)(6))  # 12
+
+# def func(item):
+#     return item[1]
+#
+#
+# d = {'b': 3, 'c': 1, 'a': 2}  # {'c': 1, 'a': 2, 'b': 3}
+# print(d)
+# lst = list(d.items())
+# print(lst)
+# # lst.sort(key=lambda i: i[1])  # [('c', 1), ('a', 2), ('b', 3)]
+# lst.sort(key=func)  # [('c', 1), ('a', 2), ('b', 3)]
+# print(lst)
+# d1 = dict(lst)
+# print(d1)
+
+# players = [
+#     {'name': 'Антон', 'last name': 'Бирюков', 'rating': 9},
+#     {'name': 'Алексей', 'last name': 'Бодня', 'rating': 10},
+#     {'name': 'Федор', 'last name': 'Сидоров', 'rating': 4},
+#     {'name': 'Михаил', 'last name': 'Семенов', 'rating': 6},
+# ]
+#
+# res1 = sorted(players, key=lambda i: i['last name'])
+# print(res1)
+#
+# res2 = sorted(players, key=lambda i: i['rating'])
+# print(res2)
+#
+# res3 = sorted(players, key=lambda i: i['rating'], reverse=True)
+# print(res3)
+
+# a = [
+#     lambda x, y: x + y,  # a[0] -> 7
+#     lambda x, y: x - y,  # a[1] -> 3
+#     lambda x, y: x * y,  # a[2] -> 10
+#     lambda x, y: x / y,  # a[3] -> 2.5
+# ]
+#
+# print(a[0](5, 2))
+# print(a[1](5, 2))
+# print(a[2](5, 2))
+# print(a[3](5, 2))
+
+# d = {
+#     1: lambda: print('Monday'),
+#     2: lambda: print('Tuesday'),
+#     3: lambda: print('Wednesday'),
+#     4: lambda: print('Thursday'),
+#     5: lambda: print('Friday'),
+#     6: lambda: print('Saturday'),
+#     7: lambda: print('Sunday'),
+# }
+#
+# d[6]()  # Saturday
+
+# print((lambda a, b: a if a > b else b)(15, 23))
+
+# print((lambda a, b, c: a if (a < b and a < c) else (b if b < c else c))(9, 8, 5))
