@@ -2,7 +2,6 @@
 # Введение
 # import random
 # import random
-
 # name = "Alina"  # Инициация переменной
 # print("Hello,", name)
 # age = 17
@@ -2372,3 +2371,225 @@
 # print((lambda a, b: a if a > b else b)(15, 23))
 
 # print((lambda a, b, c: a if (a < b and a < c) else (b if b < c else c))(9, 8, 5))
+
+
+# -----------------------------------------------------
+# map(func, *iterables)
+
+# def mult(t):
+#     return t * 2
+#
+#
+# lst1 = [2, 8, 12, -5, -10]
+#
+# lst2 = list(map(mult, lst1))
+# # lst2 = list(map(lambda t: t * 2, [2, 8, 12, -5, -10]))
+# print(lst2)  # [4, 16, 24, -10, -20]
+
+# t = (2.88, -1.75, 100.55)
+# # t2 = tuple(map(int, t))
+# t2 = tuple(map(lambda x: int(x), t))
+# print(t2)  # (2, -1, 100)
+
+# print(int((2.88, -1.75, 100.55)))  # TypeError
+
+# t = "Hello"
+# t2 = tuple(map(str, t))
+# print(t2)  # ('H', 'e', 'l', 'l', 'o')
+
+# st = ['a', 'b', 'c', 'd', 'e']
+# num = [1, 2, 3, 4, 5, 6]
+#
+# res = list(map(lambda x, y: (x, y), st, num))
+# print(res)
+#
+# res1 = list(map(lambda x, y: x * y, st, num))
+# print(res1)
+
+# num = ['1', '2', '3', '4', '5']
+# # print(int(num))  # TypeError
+# print(list(map(int, num)))  # [1, 2, 3, 4, 5]
+
+# l1 = [1, 2, 3]
+# l2 = [4, 5, 6]
+# print(list(map(lambda x, y: x + y, l1, l2)))
+
+# t = ('kdfjs', 'ewhehf', 'jshfiu', 'hfru', 'eufvb')
+# t2 = filter(lambda s: len(s) == 5, t)
+# print(tuple(t2))
+
+# b = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
+# res = list(filter(lambda s: s > 75, b))
+# print(res)  # [90, 76, 88, 81]
+#
+# res1 = list(map(lambda x: x + 5, b))
+# print(res1)  # [71, 95, 73, 64, 81, 65, 93, 79, 86, 70]
+
+# m = list(map(lambda x: x ** 2, range(10)))
+# print(m)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+#
+# n = list(map(lambda x: x ** 2, filter(lambda x: x % 2, range(10))))
+# print(n)  # [1, 9, 25, 49, 81]
+#
+# n1 = [x ** 2 for x in range(10) if x % 2]
+# print(n1)  # [1, 9, 25, 49, 81]
+
+# from random import randint
+# a = list(randint(0, 50) for i in range(10))
+# print(a)
+#
+# print('[10; 20] =', list(filter(lambda x: 10 <= x <= 20, a)))
+
+# def hello():
+#     return "Hello, I'm func 'hello'"
+#
+#
+# def super_func(func):
+#     print("Hello, I'm func 'super_func'")
+#     print(func())
+#
+#
+# super_func(hello)
+
+# def hello():
+#     return "Hello, I'm func 'hello'"
+#
+#
+# test = hello
+# print(test())  # Hello, I'm func 'hello'
+
+# def my_decorator(func):
+#     def wrap():
+#         print("Before the function")
+#         func()
+#         print("After the function")
+#     return wrap
+#
+#
+# def func_test():
+#     print("Hello, I'm func 'func_test'")
+#
+#
+# test = my_decorator(func_test)
+# test()
+
+# def my_decorator(func):  # декорирующая функция
+#     def wrap():
+#         print('+' * 30)
+#         func()
+#         print('=' * 30)
+#     return wrap
+#
+#
+# @my_decorator  # декоратор
+# def func_test():  # декорируемая функция
+#     print("Hello, I'm func 'func_test'")
+#
+#
+# @my_decorator
+# def hello():
+#     print("Hello I'm func 'hello'")
+#
+#
+# func_test()
+# hello()
+
+# def bold(fn):
+#     def wrap():
+#         return "<b>" + fn() + "</b>"
+#
+#     return wrap
+#
+#
+# def italic(fn):
+#     def wrap():
+#         return "<i>" + fn() + "</i>"
+#
+#     return wrap
+#
+#
+# @bold
+# @italic
+# def hello():
+#     return 'text'
+#
+#
+# print(hello())
+
+# def quant(func):
+#     n = 0
+#
+#     def wrap(arg1, arg2):
+#         nonlocal n
+#         n += 1
+#         func(arg1, arg2)
+#         print("Вызов функции: ", n, "\n", "*" * 20, sep='')
+#         return func
+#
+#     return wrap
+#
+#
+# @quant
+# def hello(a, b):
+#     print('Hello,', a, '\nHello,', b)
+#
+#
+# hello('Python', 'JavaScript')
+# hello('one', 'two')
+# # hello()
+
+# def args_decorator(fn):
+#     def wrap(*args, **kwargs):
+#         print('args:', args)
+#         print('kwargs:', kwargs)
+#         fn(*args, **kwargs)
+#
+#     return wrap
+#
+#
+# @args_decorator
+# def print_data(a, b, c, study='Python'):
+#     print(a, b, c, 'изучают', study, '\n')
+#
+#
+# print_data("Борис", "Елизавета", "Светлана", study='JavaScript')
+# print_data("Владимир", "Екатерина", "Виктор")
+
+# def decor(args1, args2):
+#     def args_dec(fn):
+#         def wrap(x, y):
+#             print(args1, x, args2, y, "=", end=' ')
+#             fn(x, y)
+#
+#         return wrap
+#     return args_dec
+#
+#
+# @decor("Сумма:", '+')
+# def summa(a, b):
+#     print(a + b)
+#
+#
+# @decor("Разность:", '-')
+# def sub(a, b):
+#     print(a - b)
+#
+#
+# summa(5, 2)
+# sub(5, 2)
+
+# def multiply(args1):
+#     def test(fn):
+#         def wrap(x):
+#             return fn(x) * args1
+#
+#         return wrap
+#     return test
+#
+#
+# @multiply(3)
+# def return_num(num):
+#     return num
+#
+#
+# print('Result:', return_num(5))
