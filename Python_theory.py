@@ -2593,3 +2593,190 @@
 #
 #
 # print('Result:', return_num(5))
+
+
+# -----------------------------------------------------
+# str (строки)
+# Префиксы строк:
+# U/u => строка выводится в юникоде
+# R/r => подавление экранирования элементов
+# F/f => вывод переменных в составе строки
+# fr => сборка адреса файла/папки т.д. в памяти
+
+# print(05)  # SyntaxError
+
+# print(int('18'))
+# print(int(18.5))
+# # print(int('18.5'))  # ValueError
+
+# print(int('100', 2))  # 10
+# print(int('100', 8))  # 64
+# print(int('100', 10))  # 100
+# print(int('100', 16))  # 256
+#
+# print(bin(18))  # двоичная СИ -> 0b10010
+# print(oct(18))  # восьмеричная СИ -> 0o22
+# print(hex(18))  # двенадцатеричная СИ -> 0x12
+#
+# print(0b10010)  # десятичная СИ -> 18
+# print(0o22)  # десятичная СИ -> 18
+# print(0x12)  # десятичная СИ -> 18
+# print(0b10010 + 0o22 + 0x12 + 18)  # 72
+
+# q = 'Pyt'
+# w = 'hon'
+# e = q + w
+# print(e)
+# # print(e * -3)  # (empty)
+# # print('y' in e)  # True
+# # print('y1' in e)  # False
+# # print(e[1])  # y
+# # print(e[-6])  # P
+# # print(e[1:4])  # yth
+# # print(e[::-1])  # nohtyP
+#
+# # e[3] = 't'  # TypeError (str - неизменяемый тип данных)
+# e = e[:3] + 't' + e[4:]
+# print(e)  # Pytton
+
+# def changeCharToStr(s, c_old, c_new):
+#     s2 = ""
+#     i = 0
+#
+#     while i < len(s):
+#         if s[i] == c_old:
+#             s2 += c_new
+#         else:
+#             s2 += s[i]
+#         i += 1
+#
+#     return s2
+#
+#
+# str1 = 'Я изучаю Nython. Мне нравится Nython. Nython очень интересный язык программирования.'
+#
+# str2 = changeCharToStr(str1, 'N', 'P')
+# print('str1 =', str1)
+# print('str2 =', str2)
+
+# print("Привет")
+# print(u"Привет")  # U/u => строка выводится в юникоде
+
+# print("C:\\folder\\file.txt\\")
+# print(r"C:\folder\file.txt")  # R/r => подавление экранирования элементов
+# print(r"C:\folder\file.txt\\"[:-1])
+# print(R"C:\folder\file.txt" + "\\")
+
+# name = "Dmitry"
+# age = 25
+# print(f"My name is {name}, I'm {age} years old.")  # F/f => вывод переменных в составе строки
+# m = 2.27456287
+# print(f'Number: {round(m, 2)}')  # 2.27 (str)
+# print(f'Number: {m:.3f}')  # 2.27 (str)
+
+# x = 10
+# y = 5
+
+# print(f"{x = }, {y = }")  # x=10, y=5
+# print("x = ", x, ", y = ", y, sep='')
+# # print(x=, y=)  # SyntaxError
+
+# print(f"{x} x {y} / 2 = {x * y / 2}")  # 10 x 5 / 2 = 25.0
+
+# num = 74
+# print(f'{{num}}')  # {num}
+# print(f'{{{num}}}')  # {74}
+# print(f'{{{{{num}}}}}')  # {{74}}
+
+# dir_name = "my_doc"
+# file_name = "data.txt"
+# print(fr"home\{dir_name}\{file_name}")
+# print("home\\" + dir_name + "\\" + file_name)
+
+# s = """
+# Многострочный\n
+# текст
+# """
+# print(s)
+#
+# s1 = '''
+# Многострочный 'самый' "новый"
+#         текст
+# '''
+# print(s1)
+#
+# s2 = "Te\n        xt"
+# print(s2)
+
+# def square(n):
+#     """Принимает число n, возвращает его квадрат"""
+#     return n ** 2
+#
+#
+# print(square(5))
+# print(square.__doc__)
+# print(sum.__doc__)
+# print(min.__doc__)
+# print(len.__doc__)
+
+
+# from math import pi
+#
+#
+# def cylinder(r, h):
+#     """
+#     Вычисляет площадь цилиндра.
+#
+#     Вычисляет площадь цилиндра на основании заданных высоты и радиуса основания
+#
+#     :param r: положительное число, радиус основания цилиндра
+#     :param h: положительное число, высота цилиндра
+#     :return: положительное число, площадь цилиндра
+#     """
+#     print('Hello')
+#     return 2 * pi * r * (r + h)
+#
+#
+# print(cylinder(2, 4))
+# print(cylinder.__doc__)
+
+# print(ord('a'))  # 97 - кодировка ASCII/Unicode
+# print(ord('й'))  # 1081
+
+# while True:
+#     n = input("-> ")
+#     if n != -1:
+#         print(ord(n))
+#     else:
+#         break
+
+# print(chr(1104))  # ѐ
+
+# str1 = 'Test string for me'
+# code = [ord(i) for i in str1]
+# print('ASCII коды:', code)
+#
+# # mean = round(sum(code) / len(code))
+# # code.insert(0, mean)
+# # print('Среднее арифметическое:', code)
+#
+# code = [int(sum(code) / len(code))] + code
+# print('Среднее арифметическое:', code)
+#
+# code += [ord(x) for x in input('-> ')[:3] if ord(x) not in code]
+# print(code)
+#
+# print('Количество элементов, равных последнему:', code.count(code[-1]) - 1)
+#
+# code.sort(reverse=True)
+# print(code)
+
+# print(chr(97))  # a
+# print(chr(1048))  # И
+# print(chr(8364))  # €
+
+# print("apple" == "Apple")  # False
+# print("apple" > "Apple")  # True
+#
+# print(ord("a"))  # 97
+# print(ord("A"))  # 65
