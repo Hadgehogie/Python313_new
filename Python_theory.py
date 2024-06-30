@@ -15,6 +15,8 @@
 # print(type(text))  # str - "Hello"
 # a = True
 # print(type(a))  # bool - True, False
+# import re
+import re
 
 # a = 4
 # b = 5
@@ -2986,3 +2988,180 @@
 
 # print(re.findall(reg5, s))  # все, кроме цифр
 
+
+# s = "Я ищу совпадения в 2024 году. И я их найду в 2 счёта. 198765 Hello[-World]"
+# reg = r"[A-Za-z]"  # r"[a-zA-Z]"
+# reg1 = r"[A-Za-z[]]"
+# reg2 = r"[A-Za-z[\]]"
+# # reg3 = r"[A-Za-z\]-\[]"  # re.error
+# reg3 = r"[a-zA-Z\]\[-]"
+#
+# print(re.findall(reg, s))
+# print(re.findall(reg1, s))  # ['d]']
+# print(re.findall(reg2, s))
+# print(re.findall(reg3, s))
+
+# import re
+#
+# st = "Час в 24-часовом формате от 00 до 23. 2021-06-15Е21:45. Минуты в диапазоне от 00 до 59. 2021-06-15Т01:09"
+#
+# req = r"[0-2][0-9]:[0-5][0-9]"
+# print(re.findall(req, st))
+
+# s = "Я ищу совпадения в 2024 году. И я их найду в 2 счёта. 198.765 Hello[-World] 2000000"
+
+
+# -----------------------------------------------------
+# Параметры регулярных выражений:
+
+# reg = r"."
+# reg1 = r"\."
+# reg2 = r"\d"  # выводятся только цифры
+# reg3 = r"\D"  # выводится всё, кроме цифр
+# reg4 = r"\s"  # выводятся только пробелы
+# reg5 = r"\S"  # выводится всё, кроме пробелов
+# reg6 = r"\w"  # выводятся все буквы, цифры и _
+# reg7 = r"\W"  # выводится всё остальное
+# reg8 = r"\AЯ ищу"  # элемент выводится, только если он находится в начале строки
+# reg9 = r"-World]\Z"  # элемент выводится, только если он находится в конце строки
+# reg10 = r"\bсов"  # элемент выводится, только если он находится в начале или конце слова в пределах строки
+# reg11 = r"\B9876"  # элемент выводится, только если он находится в середине слова в пределах строки
+
+# print(re.findall(reg, s))
+# print(re.findall(reg1, s))
+# print(re.findall(reg2, s))
+# print(re.findall(reg3, s))
+# print(re.findall(reg4, s))
+# print(re.findall(reg5, s))
+# print(re.findall(reg6, s))
+# print(re.findall(reg7, s))
+# print(re.findall(reg8, s))
+# print(re.findall(reg9, s))
+# print(re.findall(reg10, s))
+# print(re.findall(reg11, s))
+
+
+# -----------------------------------------------------
+# Квантификаторы (указание количества повторений):
+# ? = [0; 1]
+# * = [0; +)
+# + = [1; +)
+# {x} = ровно x повторений
+# {m,n} = от m до n повторений включительно
+# {m,} = m или больше повторений
+# {,n} = n или меньше повторений
+
+# reg = r"\w"
+# reg1 = r"\w+"
+# reg2 = r"\d+"
+# reg3 = r"20*"  # ['20', '2', '2', '2000000']
+# reg4 = r"20?"  # ['20', '2', '2', '20']
+# reg5 = r"20+"  # ['20', '2000000']
+#
+# print(re.findall(reg, s), end='\n\n')
+# print(re.findall(reg1, s), end='\n\n')
+# print(re.findall(reg2, s), end='\n\n')
+# print(re.findall(reg3, s), end='\n\n')
+# print(re.findall(reg4, s), end='\n\n')
+# print(re.findall(reg5, s), end='\n\n')
+
+# d = "Числа: 7, +17, --42, 0013, 0.3"
+# print(re.findall(r"[+-]?\d+[.]?\d*", d))
+
+# st = "05-03-1987  # Date of birth"
+# print("Date of birth:", re.sub(r'\s#.*', "", st))  # Date of birth: 05-03-1987
+# print("Date of birth:", re.sub('-', '.', re.sub(r'\s#.*', "", st)))  # Date of birth: 05.03.1987
+# print("Date of birth:", re.sub(r'\s#.*', "", st).replace('-', '.'))  # Date of birth: 05.03.1987
+
+# st = "author=Пушкин А.С.; title = Евгений Онегин; price =200; year= 1831"
+# req = r"\w+\s*=\s*\w+[^;]+"
+# print(re.findall(req, st))
+
+# st = "12 сентября 2021 года 235 1454691600"
+# reg = r"\d{4}"  # ['2021', '1454', '6916']
+# reg1 = r"\d{2,4}"  # ['12', '2021', '235', '1454', '6916', '00']
+# reg2 = r"\d{2,}"  # = {2,10}
+# reg3 = r"\d{,4}"  # = {0,4}
+#
+# print(re.findall(reg, st))
+# print(re.findall(reg1, st))
+# print(re.findall(reg2, st))
+# print(re.findall(reg3, st))
+
+# st = "+7 499 456-45-78, +74994564578, 7 (499) 456 45 78, 74994564578"
+# reg = r"\+?7\d{10}"
+# print(re.findall(reg, st))
+# print(re.findall(r"\+?7\s?[(]?\d{3}[)]?\s?\d{3}-?\s?\d{2}-?\s?\d{2}", st))
+
+# s = "Я ищу совпадения в 2024 году. И я их найду в 2 счёта. 198.765 Hello[-World] 2000010 002000"
+
+# reg = r"\w+\s\w+"
+# reg1 = r"\w+\s\w+$"
+#
+# print(re.findall(reg, s))
+# print(re.findall(reg1, s))
+
+
+# def valid_login(name):
+#     # return re.findall(r"[A-Za-z0-9_-]{6,16}", name)  # length = 6-16, english letters, _, -, 0-9
+#     return re.findall(r"^[A-Za-z0-9_-]{6,16}$", name)  # length = 6-16, english letters, _, -, 0-9
+#
+#
+# print(valid_login("Python_master"))
+# print(valid_login("Python!!!"))  # [Python] -> []
+# print(valid_login("Pytho!!!"))  # [] -> []
+# print(valid_login("Python@Python"))  # -> []
+
+
+# -----------------------------------------------------
+# Параметр flags= в модуле re:
+# re.ASCII or re.A => только ASCII символы
+# re.DEBUG
+# re.IGNORECASE or re.I => вывод совпадений вне зависимости от регистра буквы
+# re.DOTALL or re.S => \n выводится в составе . наравне с другими символами
+# re.MULTILINE or re.M => ^ и $ действуют в пределах 1 строки многострочного текста
+# re.VERBOSE or re.X => в регулярное выражение включаются пробелы и комментарии, считываются переносы
+
+# print(re.findall(r"\w", "12 + й"))  # ['1', '2', 'й']
+# print(re.findall(r"\w", "12 + й", flags=re.ASCII))  # ['1', '2']
+# print(re.findall(r"\w", "12 + й", flags=re.A))  # ['1', '2']
+
+# text = 'hello world'
+# print(re.findall(r"\w+", text), end='\n\n')
+# print(re.findall(r"\w+", text, re.DEBUG), end='\n\n')
+# print(re.findall(r"\w\+", text, re.DEBUG), end='\n\n')
+
+# s = "Я ищу совпадения в 2024 году. И я их найду в 2 счёта. 198.765 Hello[-World] 2000000"
+# reg = r'я'
+#
+# print(re.findall(reg, s, re.IGNORECASE))
+
+# text = """
+# one
+# two
+# """
+#
+# # print(re.findall(r"one.\w+", text))  # []
+# # print(re.findall(r"one.\w+", text, re.DOTALL))  # ['one\ntwo']
+#
+# print(re.findall(r'one$', text))  # []
+# print(re.findall(r'one$', text, re.MULTILINE))  # ['one']
+
+# print(re.findall("""[a-z.-]+@[a-z.-]+""", 'test@mail.ru'))
+# print(re.findall("""
+# [a-z.-]+    # part 1
+# @           # @
+# [a-z.-]+    # part 2
+# """, 'test@mail.ru', re.VERBOSE))
+
+# text = """Python,
+# python,
+# PYTHON"""
+#
+# reg = r"^python"
+# reg1 = r"(?i)^python"
+# reg2 = r"(?im)^python"
+#
+# print(re.findall(reg, text))  # ['python']
+# print(re.findall(reg1, text))  # ['Python']
+# print(re.findall(reg2, text))  # ['Python', 'python', 'PYTHON']
