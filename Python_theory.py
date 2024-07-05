@@ -16,7 +16,7 @@
 # a = True
 # print(type(a))  # bool - True, False
 # import re
-import re
+# import re
 
 # a = 4
 # b = 5
@@ -3300,7 +3300,166 @@ import re
 # print(re.sub(reg, r'\2.\1.\3', s))
 # # print(re.sub(reg, r'(?P=day).(?P=mon).(?P=year)', s))
 
-s = "yandex.com and yandex.ru"
-reg = r'(([a-z0-9-]{2,}\.)+[a-z]{2,4})'
+# s = "yandex.com and yandex.ru"
+# reg = r'(([a-z0-9-]{2,}\.)+[a-z]{2,4})'
+#
+# print(re.sub(reg, r'http://\1', s, re.IGNORECASE))
 
-print(re.sub(reg, r'http://\1', s, re.IGNORECASE))
+
+# -----------------------------------------------------
+# Рекурсия (вызов функцией самой себя)
+
+# def elevator(n):  # 5 -> 4 -> 3 -> 2 -> 1 -> 0
+#     if n == 0:
+#         print("You're in the basement")
+#         return n
+#     print("=>", n)
+#     elevator(n - 1)  # 5 4 3 2 1 (stack)
+#     print(n, end=' ')  # 1 2 3 4 5
+#
+#
+# n1 = int(input("Insert the floor you're on: "))  # 5
+# elevator(n1)
+#
+#
+# # stack - область в памяти (аля стопка книг)
+# # stack => 5 4 3 2 1
+# # print(stack) => 1 2 3 4 5
+
+
+# def sum_list(lst):
+#     res = 0
+#     for i in lst:
+#         res += i
+#     return res
+#
+#
+# def sum_list(lst):  # [1, ..., 9] -> [3, ..., 9] -> [5, ..., 9] -> [7, ..., 9] -> 9
+#     if len(lst) == 1:
+#         print(lst, "=> lst[0] =", lst[0])
+#         return lst[0]  # 9
+#     else:
+#         print(lst, "=> lst[0] =", lst[0])
+#         return lst[0] + sum_list(lst[1:])  # 1 + ... 3 + ... 5 + ... 7 +
+#
+#
+# print(sum_list([1, 3, 5, 7, 9]))
+
+# def to_str(n, base):  # n = 254 -> 15
+#     convert = "0123456789ABCDEF"
+#     if n < base:
+#         return convert[n]  # 'F'
+#     else:
+#         return to_str(n // base, base) + convert[n % base]  # convert[14] => 'E'
+#     # 'F' + 'E' = FE
+#
+#
+# print(to_str(365, 10))
+# # print(to_str(18, 2))
+# # print(to_str(18, 8))
+# print(to_str(254, 16))
+
+# names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
+# print(names)
+# print(len(names))  # 5
+# print(names[0])
+# print(isinstance(names[0], list))  # False
+# print(isinstance(names[3], list))  # True
+# print(isinstance(names[1][1], list))  # True
+# print(names[1][1][0])  # Chet
+
+
+# def count_items(lst):
+#     count = 0
+#     for item in lst:
+#         if isinstance(item, list):
+#             count += count_items(item)
+#         else:
+#             count += 1
+#     return count
+#
+#
+# print(count_items(names))
+
+#
+# def remove(text):
+#     if not text:
+#         return ""
+#     if text[0] == "\t" or text[0] == " ":  # False or True => True
+#         return remove(text[1:])
+#     else:
+#         return text[0] + remove(text[1:])
+#
+#
+# print(remove(" Hel     lo\tWor     l\t\td "))
+
+
+# -----------------------------------------------------
+# Работа с файлами
+# Текстовые файлы: txt -> читабельные
+# Бинарные файлы: изображения, аудио -> нечитабельные
+# f.read() - считывание всего файла
+# f.readline() - считывание одной строки
+# f.readlines() - считывание всех строк в виде списка
+
+# f = open('test.txt')  # mode='r' / 'r'
+# f1 = open(r'C:\Users\a_ego\Documents\Python 313\test.txt')  # Можно использовать файлы, лежащие вне папки проекта
+# print(f)
+# print(*f)  # Hello!
+# print(*f1)  # Hello!
+# print(f.closed)  # False
+# f.close()
+# print(f.closed)  # True
+# print(f.mode)  # r
+# print(f.name)  # test.txt
+# print(f.encoding)  # cp65001
+
+
+# f = open('test.txt')
+# print(f.read(4))  # Hell
+# print(f.read())  # o!!!!!
+# print(f.read())  # * *
+# f.close()
+
+# f = open('test1.txt', 'r')
+# print(f.readline())  # This is line1.\n
+# print(f.readline(8))  # This is
+# print(f.readline())  # line2.\n
+# print(f.readline())  # This is line3.
+# f.close()
+
+# f = open('test1.txt', 'r')
+# print(f.readlines())  # ['This is line1.\n', 'This is line2.\n', 'This is line3.\n']
+# f.close()
+
+# f = open('test1.txt', 'r')
+# print(f.readlines(16))  # ['This is line1.\n', 'This is line2.\n']
+# f.close()
+
+# f = open('test1.txt', 'r')
+# for line in f:
+#     print(line)
+# f.close()
+
+# f = open('test1.txt', 'r')
+# count = 0
+# for i in f:
+#     count += 1
+# print("count =", count)
+
+# f = open('test1.txt', 'r')
+# print("count =", len(f.readlines()))
+# f.close()
+
+# f = open('xyz.txt', 'w')
+# f.write("Hello\nWorld!\n")
+# f.close()
+
+# f = open('xyz.txt', 'a')
+# f.write("New text\n")
+# f.close()
+
+# f = open('xyz.txt', 'w')
+# line = ["This is line 1\n", "This is line 2\n"]
+# f.writelines(line)
+# f.close()
