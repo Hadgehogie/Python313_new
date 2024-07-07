@@ -3401,6 +3401,13 @@
 # f.read() - считывание всего файла
 # f.readline() - считывание одной строки
 # f.readlines() - считывание всех строк в виде списка
+# 'r' - чтение файла
+# 'w' - создание/перезапись файла
+# 'a' - дозапись файла
+# 'r+' - чтение ИЛИ перезапись файла
+# 'w+' - чтение ИЛИ перезапись ИЛИ создание файла
+# 'a+' - дозапись ИЛИ создание файла
+# 'b' - бинарный (двоичный режим)
 
 # f = open('test.txt')  # mode='r' / 'r'
 # f1 = open(r'C:\Users\a_ego\Documents\Python 313\test.txt')  # Можно использовать файлы, лежащие вне папки проекта
@@ -3463,3 +3470,128 @@
 # line = ["This is line 1\n", "This is line 2\n"]
 # f.writelines(line)
 # f.close()
+
+# f = open('xyz.txt', 'w')
+# lst = [str(i) for i in range(1, 20)]
+# print(lst)
+# for index in lst:
+#     f.write(index + "\t")
+# f.close()
+
+# f = open('text2.txt', 'w')
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл;\n")
+# f.close()
+
+# f = open('text2.txt', 'r')
+# rl = f.readlines()
+# f.close()
+#
+# print(rl)
+# rl[1] = "Hello World\n"
+# print(rl)
+#
+# f = open('text2.txt', 'w')
+# f.writelines(rl)
+# f.close()
+
+
+# f = open('text2.txt', 'r')
+# lst = f.readlines()
+# f.close()
+#
+# pos = int(input("pos = "))
+# if 0 <= pos < len(lst):
+#     lst.pop(pos)
+# else:
+#     print("Индекс введен неверно")
+# print(lst)
+#
+# f = open('text2.txt', 'w')
+# f.writelines(lst)
+# f.close()
+
+# f = open('test.txt', 'r')
+# print(f.read(3))  # Hel
+# print(f.tell())  # текущая позиция курсора (3)
+# print(f.seek(1))  # перемещение курсора (1)
+# print(f.read())  # ello!!!!!
+# print(f.tell())  # 10
+# f.close()
+
+# # f = open('test5.txt', 'r+')  # FileNotFoundError
+# f = open('test5.txt', 'w+')
+# f1 = open('test6.txt', 'a+')
+# f.close()
+# f1.close()
+
+# # f = open('test.txt', 'r+')
+# f = open('test.txt', 'a+')  # 52 (len)
+# # print(f.write("hehe I am "))  # hehe I am ing Python
+# print(f.write("I am learning Python"))  # I am learning Python
+# print(f.tell())  # 20
+# print(f.seek(3))  # 3
+# print(f.write("-new string-"))  # 12 (len)
+# print(f.tell())  # 3 + 12 => 15
+# f.close()
+
+# with open('test.txt', 'w+') as f:
+#     print(f.write('01234\n56789'))
+#
+# with open('test.txt', 'r') as f:
+#     for line in f:
+#         print(line[:3])  # 012, 567
+
+# file_name = "res_1.txt"
+# lst = [4.5, 2.8, 3.9, 1.0, 0.3, 4.33, 7.777]
+#
+#
+# def get_line(lt):
+#     lt = list(map(str, lt))
+#     print(lt)
+#     return " ".join(lt)
+#
+#
+# with open(file_name, 'w') as f:
+#     # f.write(lst)  # TypeError
+#     # f.write(str(lst))  # '[4.5, 2.8, 3.9, 1.0, 0.3, 4.33, 7.777]'
+#     f.write(get_line(lst))
+#
+#
+# with open(file_name, 'r') as f:
+#     nums = f.read()
+#
+# print(nums)
+# nums_list = list(map(float, nums.split()))
+# print(nums_list)
+# print(sum(nums_list))  # 24.607
+# print(len(nums_list))  # 7
+#
+# print("Done!")
+
+
+# def longest_words(file):
+#     with open(file, 'r') as f:
+#         w = f.read().split()
+#         # max_length = max(w)  # системах.
+#         max_length = len(max(w, key=len))  # взаимодействия -> 14
+#         print(max_length)  # 14
+#         res = [word for word in w if len(word) == max_length]
+#         if len(res) == 1:
+#             return res[0]  # взаимодействия
+#         return res
+#
+#
+# print(longest_words('words.txt'))
+
+one = 'one.txt'
+two = 'two.txt'
+
+# text = "Строка №1\nСтрока №2\nСтрока №3\nСтрока №4\nСтрока №5\nСтрока №6\nСтрока №7\nСтрока №8\nСтрока №9\nСтрока №10"
+#
+# with open(one, 'w') as f:
+#     f.write(text)
+
+# with open(one, 'r') as fr, open(two, 'w') as fw:
+#     for line in fr:
+#         line = line.replace("Строка", "Линия -")
+#         fw.write(line)
