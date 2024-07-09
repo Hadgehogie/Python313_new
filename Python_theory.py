@@ -3583,8 +3583,8 @@
 #
 # print(longest_words('words.txt'))
 
-one = 'one.txt'
-two = 'two.txt'
+# one = 'one.txt'
+# two = 'two.txt'
 
 # text = "Строка №1\nСтрока №2\nСтрока №3\nСтрока №4\nСтрока №5\nСтрока №6\nСтрока №7\nСтрока №8\nСтрока №9\nСтрока №10"
 #
@@ -3595,3 +3595,150 @@ two = 'two.txt'
 #     for line in fr:
 #         line = line.replace("Строка", "Линия -")
 #         fw.write(line)
+
+
+# -----------------------------------------------------
+# Модуль OS и OS.PATH
+
+import os
+# import os.path
+
+# print(os.path.split(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))
+
+# print(os.getcwd())  # путь к текущей директории
+#
+# print(os.listdir())  # содержимое текущей директории
+#
+# print(os.listdir(".."))  # выход на уровень выше
+#
+# os.mkdir("folder1")  # создание папки
+
+# os.mkdir("nested1/nested2/nested3")  # FileNorFoundError
+
+# os.makedirs("nested1/nested2/nested3")  # создание папки с промежуточными директориями (вложенные папки)
+
+# os.rmdir("folder1")  # удаление папки
+
+# os.remove("xyz.txt")  # удаление файла
+
+# os.rmdir("folder")  # OSError (папка не пуста)
+
+# os.remove("folder/test.txt")
+# os.rmdir("folder")
+
+# os.rename("nested1", "test")  # переименование папки
+
+# os.rename("words.txt", "test/words_new.txt")  # переименование и перемещение файла
+
+# os.rename("two.txt", "folder/file.txt")  # FileNotFoundError
+
+# os.renames("two.txt", "folder/file.txt")  # переименование и перемещение файла в НОВУЮ папку
+
+# for root, dirs, files in os.walk('test', topdown=False):
+#     print('Root:', root)
+#     print('Subdirs:', dirs)
+#     print('Files:', files)
+
+
+# def remove_empty_dirs(root_tree):
+#     print(f'Удаление пустых директорий в ветви {root_tree}')
+#     print('-' * 50)
+#
+#     for root, dirs, files in os.walk(root_tree):
+#         if not os.listdir(root):
+#             os.rmdir(root)
+#             print(f'Директория {root} удалена.')
+#
+#     print('-' * 50)
+#
+#
+# remove_empty_dirs("test")
+
+# print(os.path.split(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt")[1])
+# # раху (head) и кету (tail) - разбиение пути элемента на последнем /.
+# print(os.path.dirname(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))  # путь
+# print(os.path.basename(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))  # последний элемент
+
+# print(os.path.join(r"C:\Users", "a_ego", "Documents", "Python 313", "test"))  # соединение компонентов пути
+
+# print(os.path.join(r"a_ego", "C:\Users", "Documents", "Python 313", "test"))  # SyntaxError
+
+# dirs = [r'Work\F1', r'Work\F2\F21']
+# for d in dirs:
+#     os.makedirs(d)
+#
+# files = {
+#     r'Work': ['w.txt'],
+#     r'Work\F1': ['f11.txt', 'f12.txt', 'f13.txt'],
+#     r'Work\F2\F21': ['f211.txt', 'f212.txt']
+# }
+# for k, v in files.items():
+#     for value in v:
+#         file_path = os.path.join(k, value)
+#         open(file_path, 'w').close()
+
+# files_with_text = [r'Work\w.txt', r'Work\F1\f12.txt', r'Work\F2\F21\f211.txt', r'Work\F2\F21\f212.txt']
+# for file in files_with_text:
+#     with open(file, 'w') as f:
+#         f.write(f"Some sort of text for a file, located at the destination {file}")
+
+# def print_tree(root, topdown):
+#     print(f"Обход {root} {'сверху вниз' if topdown else 'снизу вверх'}")
+#     for root, dirs, files in os.walk(root, topdown):
+#         print(root)
+#         print(dirs)
+#         print(files)
+#     print("-" * 50)
+#
+#
+# print_tree('Work', False)
+# print_tree('Work', True)
+
+# print(os.path.exists(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))  # True
+#
+# print(os.path.exists(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3"))  # True
+#
+# print(os.path.exists(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test_hehe.txt"))  # False
+#
+# print(os.path.exists(r"C:\Users\a_ego\Documents\Python 313\test\does_not\exist\test1.txt"))  # False
+#
+# print(os.path.isfile(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))  # True
+#
+# print(os.path.isfile(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3"))  # не файл - False
+#
+# print(os.path.isfile(r"C:\Users\a_ego\Documents\Python 313\test\does_not\exist\test1.txt"))  # неверный путь - False
+#
+# print(os.path.isdir(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))  # False
+#
+# print(os.path.isdir(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3"))  # True
+#
+# print(os.path.isfile(r"C:\Users\a_ego\Documents\Python 313\test\does_not\exist"))  # неверный путь - False
+
+import time
+
+path = "Python_theory.py"
+# print(os.path.getsize(path))  # размер файла в байтах
+
+# path = "main.py"
+# print(os.path.getsize(path))  # FileNotFoundError
+
+# print(os.path.getsize(path) // 1024)  # размер файла в килобайтах
+
+# print(os.path.getatime(path))  # время последнего доступа к файлу (сек)
+# print(os.path.getctime(path))  # время создания файла (сек)
+# print(os.path.getmtime(path))  # время последнего изменения файла (сек)
+
+# print(time.strftime("%d.%m.%Y, %H:%M:%S", time.localtime(os.path.getatime(path))))  # время последнего доступа к файлу
+# print(time.strftime("%d.%m.%Y, %H:%M:%S", time.localtime(os.path.getctime(path))))  # время
+# # создания файла (сек)
+# print(time.strftime("%d.%m.%Y, %H:%M:%S", time.localtime(os.path.getmtime(path))))  # время последнего изменения файла
+
+# file_path = r"test\nested2\nested3\test1.txt"
+#
+# if os.path.exists(file_path):
+#     # head = os.path.dirname(file_path)
+#     # tail = os.path.basename(file_path)
+#     head, tail = os.path.split(file_path)
+#     print(f'{tail} ({head}) - last access time {os.path.getatime(file_path)} sec')
+# else:
+#     print(f"File {file_path} does not exist")

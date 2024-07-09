@@ -1,0 +1,1 @@
+Some sort of text for a file, located at the destination Work\w.txt
