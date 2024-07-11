@@ -3600,7 +3600,7 @@
 # -----------------------------------------------------
 # Модуль OS и OS.PATH
 
-import os
+# import os
 # import os.path
 
 # print(os.path.split(r"C:\Users\a_ego\Documents\Python 313\test\nested2\nested3\test1.txt"))
@@ -3714,9 +3714,9 @@ import os
 #
 # print(os.path.isfile(r"C:\Users\a_ego\Documents\Python 313\test\does_not\exist"))  # неверный путь - False
 
-import time
-
-path = "Python_theory.py"
+# import time
+#
+# path = "Python_theory.py"
 # print(os.path.getsize(path))  # размер файла в байтах
 
 # path = "main.py"
@@ -3742,3 +3742,200 @@ path = "Python_theory.py"
 #     print(f'{tail} ({head}) - last access time {os.path.getatime(file_path)} sec')
 # else:
 #     print(f"File {file_path} does not exist")
+
+
+# -----------------------------------------------------
+# Объектно-ориентированное программирование (OOP)
+# Инкапсуляция - защита от несанкционированных изменений
+# Наследование - возможность создания дочерних классов
+# Полиморфизм - возможность разной отработки разных типов данных
+# Свойства класса (поля, переменные)
+# Методы класса (функции)
+# self = ссылка на экземпляр класса
+
+
+# class Point:
+#     x = 1
+#     y = 3
+#
+#
+# p1 = Point()  # экземпляр класса (instance) -> self
+# # print(p1)  # <__main__.Point object at 0x0000022932F05940>
+# p1.x = 5
+# p1.y = 24
+# print(p1.x)  # 1 -> 5
+# print(p1.y)  # 3 -> 24
+# # print(x)  # NameError: name 'x' is not defined
+# print(p1.__dict__)  # {'x': 5, 'y': 24}
+# print(id(p1))  # 2032472383200
+#
+# p2 = Point()
+# print(p2.x)  # 1
+# print(p2.y)  # 3
+# print(p2.__dict__)  # {}
+# print(id(p2))  # 2032472383152
+#
+# print(id(Point))  # 2032469526976
+#
+# print(isinstance(p1, Point))  # True
+# print(isinstance(p2, Point))  # True
+
+
+# class Point:
+#     x = 1
+#     y = 1
+#
+#     def set_coord(self, x, y):
+#         self.x = x  # p1.x = 5
+#         self.y = y  # p1.y = 24
+#         print(self.__dict__)
+#
+#
+# p1 = Point()
+# # p1.x = 5
+# # p1.y = 24
+# # set_coord()  # NameError: name 'set_coord' is not defined
+# p1.set_coord(5, 24)  # {'x': 5, 'y': 24}
+# # Point.set_coord(p1)  # {'x': 5, 'y': 24}; self -> p1
+#
+# p2 = Point()
+# # p2.x = 10
+# # p2.y = 30
+# p2.set_coord(10, 30)  # {'x': 10, 'y': 30}
+
+
+# class Human:
+#     name = 'name'
+#     birthday = '00.00.0000'
+#     phone = '00-00-00'
+#     country = 'country'
+#     city = 'city'
+#     address = 'street, house'
+#
+#     def print_info(self):
+#         print(" Персональные данные ".center(40, "*"))
+#         print("Имя:", self.name)
+#         print("Дата рождения:", self.birthday)
+#         print("Номер телефона:", self.phone)
+#         print("Страна:", self.country)
+#         print("Город:", self.city)
+#         print("домашний адрес:", self.address)
+#         print("=" * 40)
+#
+#     def input_info(self, first_name, birthday, phone, country, city, address):
+#         self.name = first_name
+#         self.birthday = birthday
+#         self.phone = phone
+#         self.country = country
+#         self.city = city
+#         self.address = address
+#
+#     def set_address(self, address):  # устанавливаем новое поле (адрес)
+#         self.address = address
+#
+#     def get_address(self):  # получаем поле (адрес)
+#         return self.address
+#
+#     def set_name(self, name):  # устанавливаем новое поле (имя)
+#         self.name = name
+#
+#     def get_name(self):  # получаем поле (имя)
+#         return self.name
+#
+#
+# h1 = Human()
+# h1.print_info()
+# h1.input_info("Юля", "23.05.1986", "45-46-98", "Россия", "Москва", "Чистопрудный бульвар, 1А",)
+# h1.print_info()
+# h1.set_address("улица Ленина, 56")
+# h1.print_info()
+# print(h1.get_address())  # улица Ленина, 56
+# h1.set_name("Юлия")
+# print(h1.get_name())  # Юлия
+
+
+# class Person:
+#     skill = 10  # статическое свойство
+#     # name = ''
+#     # surname = ''
+#     count = 0
+#
+#     def __init__(self, name, surname):  # Инициализатор
+#         self.name = name  # динамическое свойство / просто свойство
+#         self.surname = surname
+#         # print("Инициализатор класса", self)
+#         Person.count += 1
+#
+#     # def __del__(self):  # Принудительный разрыв ссылки на область в памяти
+#     #     print("Удаление экземпляра", self)
+#     #
+#     # def print_info(self):
+#     #     # self.name = name
+#     #     # self.surname = surname
+#     #     print(f'Данные сотрудника: {self.name} {self.surname}')
+#     #
+#     # def add_skill(self, k):
+#     #     self.skill += k
+#     #     print(f'Квалификация сотрудника: {self.skill}', end='\n\n')
+#
+#
+# p1 = Person("Виктор", "Резник")
+# # p1.print_info()
+# # p1.add_skill(3)
+# # del p1
+# # p1 = 5
+# print(p1.count)
+#
+# p2 = Person("Анна", "Долгих")
+# # p2.print_info()
+# # p2.add_skill(2)
+# print(p2.count)
+#
+# p3 = Person("Анна", "Долгих")
+#
+# print(Person.count)  # 2 -> 3
+# print(p1.count)  # 2 -> 3
+
+
+# class Robot:
+#     count = 0
+#
+#     def __init__(self, name):
+#         self.name = name
+#         print("Инициализация робота:", self.name)
+#         Robot.count += 1
+#
+#     def __del__(self):
+#         print(self.name, "выключается!")
+#         Robot.count -= 1
+#         if Robot.count == 0:
+#             print(self.name, "был последним.")
+#         else:
+#             print("Работающих роботов осталось:", Robot.count)
+#
+#     def say_hi(self):
+#         print("Приветствую! Меня зовут:", self.name)
+#
+#     # count = 0
+#
+#
+# droid1 = Robot('R2-D2')
+# droid1.say_hi()
+# print("Численность роботов:", Robot.count)
+#
+# droid2 = Robot('C-3PO')
+# droid2.say_hi()
+# print("Численность роботов:", Robot.count)
+#
+# droid3 = Robot('HP-2PO')
+# droid2.say_hi()
+# print("Численность роботов:", Robot.count)
+#
+# print("\nЗдесь роботы могут проделать какую-то работу.\n")
+#
+# print("Роботы закончили свою работу. Давайте их выключим.")
+# del droid1
+# del droid2
+# del droid3
+# print("Численность роботов:", Robot.count)
+
