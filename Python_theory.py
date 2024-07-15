@@ -3749,8 +3749,8 @@
 # Инкапсуляция - защита от несанкционированных изменений
 # Наследование - возможность создания дочерних классов
 # Полиморфизм - возможность разной отработки разных типов данных
-# Свойства класса (поля, переменные)
-# Методы класса (функции)
+# Свойства класса (поля, переменные): статические или динамические
+# Методы класса (функции): экземпляры класса (self) или статические () или методы класса (cls)
 # self = ссылка на экземпляр класса
 
 
@@ -3866,7 +3866,7 @@
 #         # print("Инициализатор класса", self)
 #         Person.count += 1
 #
-#     # def __del__(self):  # Принудительный разрыв ссылки на область в памяти
+#     # def __del__(self):  # Деструктор
 #     #     print("Удаление экземпляра", self)
 #     #
 #     # def print_info(self):
@@ -3939,3 +3939,293 @@
 # del droid3
 # print("Численность роботов:", Robot.count)
 
+
+# class Point:
+#     __slots__ = ["__x", "__y", "z"]
+#
+#     def __init__(self, x, y):
+#         self.__x = self.__y = 0
+#         # self.set_coord(x, y)
+#         if Point.__check_value(x) and Point.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#         # self.x = x
+#         # self.y = y
+#
+#     def __check_value(c):
+#         if isinstance(c, int) or isinstance(c, float):
+#             return True
+#         return False
+#
+#     def get_coord(self):  # Получить
+#         return self.__x, self.__y
+#
+#     def set_coord(self, x, y):  # Установить
+#         # if (isinstance(x, int) or isinstance(x, float)) and (isinstance(y, int) or isinstance(y, float)):
+#         if Point.__check_value(x) and Point.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#         else:
+#             print("Координаты должны быть числами")
+#
+#     def get_x(self):
+#         return self.__x
+#
+#     def get_y(self):
+#         return self.__y
+#
+#     def set_x(self, x):
+#         if Point.__check_value(x):
+#             self.__x = x
+#         else:
+#             print(f'координата {x} должна быть числом')
+#
+#     def set_y(self, y):
+#         if Point.__check_value(y):
+#             self.__y = y
+#         else:
+#             print(f'координата {y} должна быть числом')
+#
+#
+# p1 = Point(5, 10)
+# p1.z = 1
+# print(p1.z)  # -> {'_Point__x': 5, '_Point__y': 10, 'z': 1} -> AttributeError
+# p1.set_x('asd')
+# p1.set_x(20.5)
+# p1.set_y('aaa')
+# p1.set_y(49)
+# print(p1.get_coord())  # (5, 10) -> AttributeError -> (0, 0)
+# p1.set_coord(100, "abc")
+# print(p1.get_coord())  # (100, 'abc')
+# print(p1.__dict__)  # {'x': 5, 'y': 10} -> {'_Point__x': 5, '_Point__y': 10}
+# p1.x = 100
+# p1.y = "abc"
+# print(p1.x, p1.y)  # 100 abc
+
+# print(p1.__dict__)  # {'_Point__x': 5, '_Point__y': 10, 'x': 100, 'y': 'abc'}
+# print(Point.__dict__)
+# print(p1.get_x())  # 5 -> 5 -> 20.5
+# print(p1.get_y())  # 10 -> 10 -> 49
+
+# print(p1._Point__x)  # 5 (Not allowed)
+# print(p1._Point__y)  # 10 (Not allowed)
+
+# p1._Point__x = 'asd'
+# print(p1.__dict__)  # {'_Point__x': 'asd', '_Point__y': 10}
+
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __get_x(self):
+#         return self.__x
+#
+#     def __get_y(self):
+#         return self.__y
+#
+#     def __set_x(self, x):
+#         self.__x = x
+#
+#     def __set_y(self, y):
+#         self.__y = y
+#
+#     def __del_x(self):
+#         print("Удаление свойства")
+#         del self.__x
+#
+#     x = property(__get_x, __set_x, __del_x)
+#
+#
+# p1 = Point(5, 10)
+# # print(p1.get_x())  # 5 -> AttributeError
+# p1.x = 100
+# print(p1.x)  # 100
+# del p1.x
+# print(p1.__dict__)  # {'_Point__x': 100, '_Point__y': 10} -> {'_Point__y': 10}
+
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = x
+#         self.__y = y
+#
+#     @property
+#     def x(self):
+#         return self.__x
+#
+#     @x.setter
+#     def x(self, x):
+#         if not isinstance(x, (int, float)):
+#             raise TypeError("Устанавливаемое значение должно быть числом")
+#             # print("Устанавливаемое значение должно быть числом")
+#         self.__x = x
+#
+#     @x.deleter
+#     def x(self):
+#         print("Удаление свойства")
+#         del self.__x
+#
+#     def __get_y(self):
+#         return self.__y
+#
+#     def __set_y(self, y):
+#         self.__y = y
+#
+#
+# p1 = Point(5, 10)
+# # print(p1.get_x())  # 5 -> AttributeError
+# p1.x = '100'
+# print(p1.x)  # 100
+# # del p1.x
+# print(p1.__dict__)  # {'_Point__x': 100, '_Point__y': 10}
+
+
+# class KgToPounds:
+#     def __init__(self, kg):
+#         self.__kg = kg
+#
+#     @property
+#     def kg(self):
+#         return self.__kg
+#
+#     @kg.setter
+#     def kg(self, new_kg):
+#         if isinstance(new_kg, (int, float)):
+#             self.__kg = new_kg
+#         else:
+#             print("Килограммы задаются только числами")
+#
+#     def to_pounds(self):
+#         return self.__kg * 2.205
+#
+#     def print(self):
+#         print(self.__kg, 'кг => ', end='')
+#         print(self.to_pounds(), "фунтов")
+#
+#
+# weight = KgToPounds(12)
+# weight.print()
+#
+# weight.kg = 41
+# weight.print()
+#
+# weight.kg = 'десять'
+# weight.print()
+
+
+# class Point:
+#     __count = 0
+#
+#     def __init__(self, x=0, y=0):
+#         self.x = x
+#         self.y = y
+#         Point.__count += 1
+#
+#     @staticmethod
+#     def get_count():
+#         return Point.__count
+#
+#     # get_count = staticmethod(get_count)
+#
+#
+# p1 = Point()
+# p2 = Point()
+# p3 = Point()
+#
+# print(Point.get_count())  # AttributeError -> 3
+# print(p2.get_count())  # 3
+
+
+# class Change:
+#     @staticmethod
+#     def inc(x):
+#         return x + 1
+#
+#     @staticmethod
+#     def dec(x):
+#         return x - 1
+#
+#
+# print(Change.inc(10), Change.dec(10))  # 11 9
+
+
+# class Maths:
+#     @staticmethod
+#     def maximum(*args):
+#         if len(args) == 4:
+#             return max(args)
+#         else:
+#             print("Должно быть введено 4 аргумента")
+#
+#     @staticmethod
+#     def minimum(*args):
+#         if len(args) == 4:
+#             return min(args)
+#         else:
+#             print("Должно быть введено 4 аргумента")
+#
+#     @staticmethod
+#     def mean(*args):
+#         if len(args) == 4:
+#             return sum(args) / len(args)
+#         else:
+#             print("Должно быть введено 4 аргумента")
+#
+#     @staticmethod
+#     def fact(x):
+#         for i in range(1, x):
+#             x *= i
+#         return x
+#
+#
+# print(f'Минимальное число: {Maths.minimum(3, 5, 7, 9)}')
+# print(f'Максимальное число: {Maths.maximum(3, 5, 7, 9)}')
+# print(f'Среднее арифметическое: {Maths.mean(3, 5, 7, 9)}')
+# print(f'Факториал числа: {Maths.fact(5)}')
+
+from math import sqrt
+
+
+class Area:
+    __count = 0
+
+    @staticmethod
+    def triangle_1(a, b, c):
+        Area.__count += 1
+        p = (a + b + c) / 2
+        return sqrt(p * (p - a) * (p - b) * (p - c))
+
+    @staticmethod
+    def triangle_2(a, h):
+        Area.__count += 1
+        return a * h / 2
+
+    @staticmethod
+    def square(a):
+        Area.__count += 1
+        return a ** 2
+
+    @staticmethod
+    def rectangle(a, b):
+        Area.__count += 1
+        return a * b
+
+    @staticmethod
+    def get_count():
+        return Area.__count
+
+    def print_info(self):
+        print(self, "Hello")
+
+
+square = Area()
+square.print_info()
+square1 = Area()
+Area.print_info(square1)
+print(f'Площадь треугольника по формуле Герона (3,4,5): {square.triangle_1(3, 4, 5)}')
+print(f'Площадь треугольника через основание и высоту (6,7): {square1.triangle_2(6, 7)}')
+print(f'Площадь квадрата (7): {Area.square(7)}')
+print(f'Площадь прямоугольника (2,6): {Area.rectangle(2, 6)}')
+print(f'Количество подсчетов площади: {Area.get_count()}')
