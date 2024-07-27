@@ -4185,47 +4185,307 @@
 # print(f'Среднее арифметическое: {Maths.mean(3, 5, 7, 9)}')
 # print(f'Факториал числа: {Maths.fact(5)}')
 
-from math import sqrt
+
+# from math import sqrt
+#
+#
+# class Area:
+#     __count = 0
+#
+#     @staticmethod
+#     def triangle_1(a, b, c):
+#         Area.__count += 1
+#         p = (a + b + c) / 2
+#         return sqrt(p * (p - a) * (p - b) * (p - c))
+#
+#     @staticmethod
+#     def triangle_2(a, h):
+#         Area.__count += 1
+#         return a * h / 2
+#
+#     @staticmethod
+#     def square(a):
+#         Area.__count += 1
+#         return a ** 2
+#
+#     @staticmethod
+#     def rectangle(a, b):
+#         Area.__count += 1
+#         return a * b
+#
+#     @staticmethod
+#     def get_count():
+#         return Area.__count
+#
+#     def print_info(self):
+#         print(self, "Hello")
+#
+#
+# square = Area()
+# square.print_info()
+# square1 = Area()
+# Area.print_info(square1)
+# print(f'Площадь треугольника по формуле Герона (3,4,5): {square.triangle_1(3, 4, 5)}')
+# print(f'Площадь треугольника через основание и высоту (6,7): {square1.triangle_2(6, 7)}')
+# print(f'Площадь квадрата (7): {Area.square(7)}')
+# print(f'Площадь прямоугольника (2,6): {Area.rectangle(2, 6)}')
+# print(f'Количество подсчетов площади: {Area.get_count()}')
 
 
-class Area:
-    __count = 0
-
-    @staticmethod
-    def triangle_1(a, b, c):
-        Area.__count += 1
-        p = (a + b + c) / 2
-        return sqrt(p * (p - a) * (p - b) * (p - c))
-
-    @staticmethod
-    def triangle_2(a, h):
-        Area.__count += 1
-        return a * h / 2
-
-    @staticmethod
-    def square(a):
-        Area.__count += 1
-        return a ** 2
-
-    @staticmethod
-    def rectangle(a, b):
-        Area.__count += 1
-        return a * b
-
-    @staticmethod
-    def get_count():
-        return Area.__count
-
-    def print_info(self):
-        print(self, "Hello")
+# class Date:
+#     def __init__(self, day, month, year):
+#         self.day = day  # -> 23
+#         self.month = month  # -> 10
+#         self.year = year  # -> 2024
+#
+#     @classmethod
+#     def from_string(cls, date_as_string):
+#         day, month, year = map(int, date_as_string.split("."))
+#         date1 = cls(day, month, year)  # date1 = Date(23, 10, 2024)
+#         return date1
+#
+#     @staticmethod
+#     def is_date_valid(date_as_string):
+#         if date_as_string.count(".") == 2:
+#             day, month, year = map(int, date_as_string.split("."))
+#             return 0 < day <= 31 and 0 < month <= 12 and year <= 3999
+#
+#     def string_to_db(self):
+#         return f'{self.year}-{self.month}-{self.day}'
 
 
-square = Area()
-square.print_info()
-square1 = Area()
-Area.print_info(square1)
-print(f'Площадь треугольника по формуле Герона (3,4,5): {square.triangle_1(3, 4, 5)}')
-print(f'Площадь треугольника через основание и высоту (6,7): {square1.triangle_2(6, 7)}')
-print(f'Площадь квадрата (7): {Area.square(7)}')
-print(f'Площадь прямоугольника (2,6): {Area.rectangle(2, 6)}')
-print(f'Количество подсчетов площади: {Area.get_count()}')
+# string_date = "23.10.2024"
+# day, month, year = map(int, string_date.split("."))
+# print(day, month, year)
+#
+# date = Date(day, month, year)
+# print(date.string_to_db())  # 2024-10-23
+#
+# a = 12
+# print("Число" + str(a))
+
+# date2 = Date.from_string('23.10.2024')
+# print(date2.string_to_db())  # 2024-10-23
+#
+# date3 = Date.from_string('25.12.2023')
+# print(date3.string_to_db())  # 2023-12-25
+
+# dates = [
+#     "30.12.2023",
+#     "30-12-2020",
+#     "01.01.2024",
+#     "12.31.2020"
+# ]
+#
+# for string_date in dates:
+#     if Date.is_date_valid(string_date):
+#         date = Date.from_string(string_date)
+#         print(date.string_to_db())
+#     else:
+#         print("Неправильная дата или неверный формат строки с датой")
+
+
+# class Account:
+#     rate_usd = 0.013
+#     rate_eur = 0.011
+#     SUFFIX = 'RUB'
+#     SUFFIX_USD = 'USD'
+#     SUFFIX_EUR = 'EUR'
+#
+#     def __init__(self, surname, num, percent, value=0):
+#         self.surname = surname
+#         self.num = num
+#         self.percent = percent
+#         self.value = value
+#         print(f'Счет #{self.num}, принадлежащий {self.surname}, был открыт')
+#         print('*' * 50)
+#
+#     def __del__(self):
+#         print('*' * 50)
+#         print(f'Счет #{self.num}, принадлежащий {self.surname}, был закрыт')
+#
+#     @classmethod
+#     def set_usd_rate(cls, rate):
+#         cls.rate_usd = rate
+#
+#     @classmethod
+#     def set_eur_rate(cls, rate):
+#         cls.rate_eur = rate
+#
+#     @staticmethod
+#     def convert(value, rate):
+#         return value * rate
+#
+#     def add_money(self, val):
+#         self.value += val
+#         print(f'{val} {Account.SUFFIX} было успешно добавлено!')
+#         self.print_balance()
+#
+#     def convert_to_usd(self):
+#         usd_val = Account.convert(self.value, Account.rate_usd)
+#         print(f'Состояние счета: {usd_val} {Account.SUFFIX_USD}.')
+#
+#     def convert_to_eur(self):
+#         eur_val = Account.convert(self.value, Account.rate_eur)
+#         print(f'Состояние счета: {eur_val} {Account.SUFFIX_EUR}.')
+#
+#     def edit_owner(self, new_surname):
+#         self.surname = new_surname
+#
+#     def add_percent(self):
+#         self.value += self.value * self.percent
+#         print("Проценты были успешно начислены!")
+#         self.print_balance()
+#
+#     def withdraw_money(self, val):
+#         if val > self.value:
+#             print(f'К сожалению, у вас нет {val} {Account.SUFFIX}')
+#         else:
+#             self.value -= val
+#             print(f"{val} {Account.SUFFIX} было успешно снято!")
+#         self.print_balance()
+#
+#     def print_balance(self):
+#         print(f'Текущий баланс: {self.value} {Account.SUFFIX}')
+#
+#     def print_info(self):
+#         print('Информация о счете: ')
+#         print('-' * 20)
+#         print(f'#{self.num}')
+#         print(f'Владелец: {self.surname}')
+#         self.print_balance()
+#         print(f'Проценты: {self.percent:.0%}')
+#         print('-' * 20)
+#
+#
+# acc = Account("Долгих", "12345", 0.03, 1000)
+# acc.print_info()
+# acc.convert_to_usd()
+# acc.convert_to_eur()
+# Account.set_usd_rate(2)
+# Account.set_eur_rate(3)
+# print()
+# acc.convert_to_usd()
+# acc.convert_to_eur()
+# print()
+# acc.edit_owner('Дюма')
+# acc.print_info()
+# acc.add_percent()
+# print()
+# acc.withdraw_money(100)
+# print()
+# acc.withdraw_money(3000)
+# print()
+# acc.add_money(5000)
+# print()
+# acc.withdraw_money(3000)
+# print()
+
+# import re
+#
+#
+# class UserData:
+#     def __init__(self, fio, old, ps, weight):
+#         self.fio = fio
+#         self.old = old
+#         self.password = ps
+#         self.weight = weight
+#
+#     @staticmethod
+#     def verify_fio(fio):
+#         if not isinstance(fio, str):
+#             raise TypeError("Вводимое ФИО должно быть строкой")
+#         f = fio.split()
+#         if len(f) != 3:
+#             raise TypeError("Неверный формат ввода ФИО")
+#         letters = "".join(re.findall("[a-zа-яё-]", fio, re.IGNORECASE))  # ВолковИгорьНиколаевич
+#         for s in f:
+#             if len(s.strip(letters)) != 0:
+#                 raise TypeError("При вводе ФИО можно использовать только буквы и символ '-'")
+#
+#     @staticmethod
+#     def verify_old(old):
+#         if not isinstance(old, int) or old < 14 or old > 120:  # not 14 < old < 120
+#             raise TypeError("Вводимый возраст должен быть целым числом в диапазоне от 14 до 120 лет")
+#
+#     @staticmethod
+#     def verify_weight(w):
+#         if not isinstance(w, (int, float)) or w < 20:
+#             raise TypeError("Вводимый вес должен выражаться целым или вещественным числом от 20 кг и выше")
+#
+#     @staticmethod
+#     def verify_ps(ps):
+#         if not isinstance(ps, str):
+#             raise TypeError("Вводимые паспортные данные должны быть выражены строкой")
+#         s = ps.split()
+#         if len(s) != 2 or len(s[0]) != 4 or len(s[1]) != 6:
+#             raise TypeError("Неверный формат вводимых паспортных данных")
+#         for p in s:
+#             if not p.isdigit():
+#                 raise TypeError("Вводимые серия и номер паспорта должны быть числами")
+#
+#     @property
+#     def fio(self):
+#         return self.__fio
+#
+#     @fio.setter
+#     def fio(self, fio):
+#         self.verify_fio(fio)
+#         self.__fio = fio
+#
+#     @property
+#     def old(self):
+#         return self.__old
+#
+#     @old.setter
+#     def old(self, old):
+#         self.verify_old(old)
+#         self.__old = old
+#
+#     @property
+#     def weight(self):
+#         return self.__weight
+#
+#     @weight.setter
+#     def weight(self, w):
+#         self.verify_weight(w)
+#         self.__weight = w
+#
+#     @property
+#     def password(self):
+#         return self.__password
+#
+#     @password.setter
+#     def password(self, ps):
+#         self.verify_ps(ps)
+#         self.__password = ps
+#
+#
+# p1 = UserData('Волков-Петров Игорь Николаевич', 96, "1234 567890", 80.8)
+# # p2 = UserData(456, 26, "1234 567890", 80.8)
+# # p3 = UserData('Волков Игорь', 26, "1234 567890", 80.8)
+# # p4 = UserData('Волков2 _Игорь Николаевич?', 26, "1234 567890", 80.8)
+#
+# # p5 = UserData('Волков-Петров Игорь Николаевич', 26.3, "1234 567890", 80.8)
+# # p6 = UserData('Волков-Петров Игорь Николаевич', 11, "1234 567890", 80.8)
+#
+# # p7 = UserData('Волков-Петров Игорь Николаевич', 26, "1234 567890", "fifty")
+#
+# # p8 = UserData('Волков-Петров Игорь Николаевич', 26, 1234567890, 80.8)
+# # p9 = UserData('Волков-Петров Игорь Николаевич', 26, '1234 567 890', 80.8)
+# # p10 = UserData('Волков-Петров Игорь Николаевич', 26, '123 4567890', 80.8)
+# # p10 = UserData('Волков-Петров Игорь Николаевич', 26, '123 4567890', 80.8)
+# # p11 = UserData('Волков-Петров Игорь Николаевич', 26, '123p 56&890', 80.8)
+#
+# # print(p1.fio)  # Волков-Петров Игорь Николаевич
+# p1.fio = "Волков-Петров Игорь Игоревич"
+# print(p1.fio)  # Волков-Петров Игорь Игоревич
+#
+# p1.old = 26  # TypeError
+# print(p1.old)
+#
+# p1.weight = 80.5
+# print(p1.weight)  # TypeError
+#
+# p1.password = "9876 543210"
+# print(p1.password)
