@@ -4489,3 +4489,365 @@
 #
 # p1.password = "9876 543210"
 # print(p1.password)
+
+
+# class Point:  # class Point(object):
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#
+# print(issubclass(Point, object))  # True
+# print(issubclass(Point, int))  # False
+
+
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f'({self.__x}, {self.__y})'
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = 'red', width=1) -> None:
+#         self.__sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#         print("Инициализатор базового класса Prop")
+#
+#     def get_sp(self):
+#         return self.__sp
+#
+#
+# class Line(Prop):
+#     def __init__(self, *args):
+#         # Prop.__init__(self, *args)
+#         super().__init__(*args)
+#         print("Переопределенный инициализатор Line")
+#
+#     def draw_line(self) -> None:  # def draw_line(self) -> str:
+#         print(f'Рисование линии: {self.get_sp()}, {self._ep}, {self._color}, {self._width}')
+#         # return f'Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}'
+
+
+# class Rect(Prop):
+#     def draw_rect(self) -> None:
+#         print(f'Рисование прямоугольника: {self._sp}, {self._ep}, {self._color}, {self._width}')
+
+
+# line = Line(Point(1, 2), Point(10, 20), 'yellow', 5)
+# line.draw_line()
+# print(line.get_sp())
+
+# rect = Rect(Point(30, 40), Point(70, 80))
+# rect.draw_rect()
+
+
+# DRY (Don't Repeat Yourself) - принцип "не повторяйся"
+
+
+# class Figure:
+#     def __init__(self, color):
+#         self.__color = color
+#
+#     @property
+#     def color(self):
+#         return self.__color
+#
+#     @color.setter
+#     def color(self, c):
+#         self.__color = c
+#
+#
+# class Rectangle(Figure):
+#     def __init__(self, width, height, color):
+#         self.width = width
+#         self.height = height
+#         super().__init__(color)
+#
+#     @property
+#     def width(self):
+#         return self.__width
+#
+#     @width.setter
+#     def width(self, w):
+#         if isinstance(w, int) and w > 0:
+#             self.__width = w
+#         else:
+#             raise ValueError("Вводимое значение ширины должно быть положительным числом")
+#
+#     @property
+#     def height(self):
+#         return self.__height
+#
+#     @height.setter
+#     def height(self, h):
+#         if isinstance(h, int) and h > 0:
+#             self.__height = h
+#         else:
+#             raise ValueError("Вводимое значение высоты должно быть положительным числом")
+#
+#     def area(self):
+#         print(f'The area of a {self.color} rectangle:')
+#         return self.__width * self.__height
+#
+#
+# rect = Rectangle(10, 20, 'green')
+# print(rect.area())  # -200
+
+# rect.width = -90
+# print(rect.area())  # ValueError
+
+# rect.height = -30
+# print(rect.area())  # ValueError
+
+
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f'({self.__x}, {self.__y})'
+#
+#     def is_digit(self):
+#         if isinstance(self.__x, (int, float)) and isinstance(self.__y, (int, float)):
+#             return True
+#         return False
+#
+#     def is_int(self):
+#         if isinstance(self.__x, int) and isinstance(self.__y, int):
+#             return True
+#         return False
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = 'red', width: int = 1) -> None:
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#     def set_coord(self, sp, ep):
+#         if sp.is_digit() and ep.is_digit():
+#             self._sp = sp
+#             self._ep = ep
+#         else:
+#             print("Координаты должны быть числами")
+#
+#
+# class Line(Prop):
+#     def set_coord(self, sp, ep):
+#         if sp.is_int() and ep.is_int():
+#             self._sp = sp
+#             self._ep = ep
+#         else:
+#             print("Координаты должны быть целыми числами")
+#
+#     def draw_line(self):
+#         print(f'Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# class Rect(Prop):
+#     def draw_rect(self):
+#         print(f'Рисование прямоугольника: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# line = Line(Point(1, 2), Point(10, 20), "yellow", 5)
+# line.draw_line()
+#
+# line.set_coord(Point(15, 45), Point(100.5, 200))
+# line.draw_line()
+#
+# rect = Rect(Point(30, 40), Point(70, 80))
+# rect.draw_rect()
+#
+# rect.set_coord(Point(15.5, 67), Point('one  hundred', 200))
+# rect.draw_rect()
+
+
+# class Rect:
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#
+#     def show_rect(self):
+#         print(f'Прямоугольник: \nШирина: {self.width} \nВысота: {self.height}')
+#
+#
+# class RectFon(Rect):
+#     def __init__(self, width, height, background):
+#         self.fon = background
+#         super().__init__(width, height)
+#
+#     def show_rect(self):
+#         super().show_rect()
+#         print("Фон:", self.fon)
+#
+#
+# class RectBorder(Rect):
+#     def __init__(self, width, height, line_width, line_fill, color):
+#         super().__init__(width, height)
+#         self.line_width = line_width
+#         self.line_fill = line_fill
+#         self.color = color
+#
+#     def show_rect(self):
+#         super().show_rect()
+#         print(f'Ширина контура: {self.line_width} \nТекстура контура: {self.line_fill} \nцвет контура: {self.color}')
+#
+#
+# shape1 = RectFon(400, 200, 'yellow')
+# shape1.show_rect()
+# print()
+# shape2 = RectBorder(600, 300, '1px', 'solid', 'red')
+# shape2.show_rect()
+
+
+# class Vector(list):
+#     # def __init__(self, lst):
+#     #     super().__init__()
+#     #     self.lst = lst
+#
+#     def __str__(self):
+#         return " ".join(map(str, self))
+#         # return " ".join(map(str, self.lst))
+#
+#
+# v = Vector([1, 2, 3])
+# print(sum(v))  # 6
+# print(v)  # [1, 2, 3]
+# print(type(v))  # <class '__main__.Vector'>
+
+
+# -----------------------------------------------------
+# Перегрузка методов
+
+
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f'({self.__x}, {self.__y})'
+#
+#     def is_digit(self):
+#         if isinstance(self.__x, (int, float)) and isinstance(self.__y, (int, float)):
+#             return True
+#         return False
+#
+#     def is_int(self):
+#         if isinstance(self.__x, int) and isinstance(self.__y, int):
+#             return True
+#         return False
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = 'red', width: int = 1) -> None:
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#     def set_coord(self, sp, ep):
+#         if sp.is_int() and ep.is_int():
+#             self._sp = sp
+#             self._ep = ep
+#         else:
+#             print("Координаты должны быть числами")
+#
+#
+# class Line(Prop):
+#     def draw_line(self):
+#         print(f'Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#     def set_coord(self, sp=None, ep=None):
+#         if ep is None:
+#             if sp.is_int():
+#                 self._sp = sp
+#
+#         elif sp is None:
+#             if ep.is_int():
+#                 self._ep = ep
+#         else:
+#             if sp.is_digit() and ep.is_digit():
+#                 self._sp = sp
+#                 self._ep = ep
+#             else:
+#                 print("Координаты должны быть целыми числами")
+#
+#
+# line = Line(Point(1, 2), Point(10, 20), "yellow", 5)
+# line.draw_line()
+#
+# line.set_coord(Point(15, 45), Point(100, 200))
+# line.draw_line()
+#
+# line.set_coord(Point(55, 55))
+# line.draw_line()
+#
+# line.set_coord(ep=Point(90, 20))
+# line.draw_line()
+
+
+# -----------------------------------------------------
+# Абстрактные методы
+
+
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f'({self.__x}, {self.__y})'
+#
+#     def is_digit(self):
+#         if isinstance(self.__x, (int, float)) and isinstance(self.__y, (int, float)):
+#             return True
+#         return False
+#
+#     def is_int(self):
+#         if isinstance(self.__x, int) and isinstance(self.__y, int):
+#             return True
+#         return False
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = 'red', width: int = 1) -> None:
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#     def draw(self):
+#         raise NotImplementedError("В дочернем классе должен быть определен метод draw()")
+#
+#
+# class Line(Prop):
+#     def draw(self):
+#         print(f'Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# class Rect(Prop):
+#     def draw(self):
+#         print(f'Рисование прямоугольника: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# class Ellipse(Prop):
+#     def draw(self):
+#         print(f'Рисование эллипса: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# figs = list()
+# figs.append(Line(Point(0, 0), Point(10, 10)))
+# figs.append(Line(Point(10, 10), Point(20, 10)))
+# figs.append(Rect(Point(50, 50), Point(100, 100)))
+# figs.append(Ellipse(Point(-10, -10), Point(10, 10)))
+#
+# for i in figs:
+#     i.draw()
