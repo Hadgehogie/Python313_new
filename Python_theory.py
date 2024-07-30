@@ -4851,3 +4851,275 @@
 #
 # for i in figs:
 #     i.draw()
+
+
+# -----------------------------------------------------
+# Абстрактные классы
+
+
+# from abc import ABC, abstractmethod
+#
+#
+# class Chess(ABC):  # Абстрактный класс
+#     def draw(self):
+#         print("Нарисовал шахматную фигуру")
+#
+#     @abstractmethod
+#     def move(self):
+#         print("Метод move() в базовом классе")
+#
+#
+# class Queen(Chess):
+#     def move(self):
+#         super().move()
+#         print("Ферзь перемещен на Е2Е4")
+#
+#
+# # q = Chess()  # TypeError (no implementation for abstract method 'move')
+# q = Queen()
+# q.draw()
+# q.move()
+
+
+# from abc import ABC, abstractmethod
+#
+#
+# class Currency(ABC):
+#     def __init__(self, value):
+#         self.value = value
+#
+#     @abstractmethod
+#     def convert_to_rub(self):
+#         pass
+#
+#     @abstractmethod
+#     def print_value(self):
+#         print(self.value, end=' ')
+#
+#     def show(self):
+#         print(f'= {self.convert_to_rub():.2f} RUB')
+#
+#
+# class Dollar(Currency):
+#     rate_to_rub = 74.16
+#     SUFFIX = 'USD'
+#
+#     # def convert_to_rub(self):
+#     #     return self.value * Dollar.rate_to_rub
+#     #
+#     # def print_value(self):
+#     #     super().print_value()
+#     #     print(Dollar.SUFFIX, end=' ')
+#
+#
+# class Euro(Currency):
+#     rate_to_rub = 90.14
+#     SUFFIX = 'EUR'
+#
+#     def convert_to_rub(self):
+#         return self.value * Euro.rate_to_rub
+#
+#     def print_value(self):
+#         super().print_value()
+#         print(Euro.SUFFIX, end=' ')
+#
+#
+# d = [Dollar(5), Dollar(10), Dollar(50), Dollar(100)]
+# e = [Euro(5), Euro(10), Euro(50), Euro(100)]
+#
+# d += e
+# for elem in e:
+#     elem.print_value()
+#     elem.show()
+#
+# d.show()
+
+
+# -----------------------------------------------------
+# Интерфейсы
+
+
+# from abc import ABC, abstractmethod
+#
+# class Father(ABC):
+#     @abstractmethod
+#     def display_1(self):
+#         pass
+#
+#     @abstractmethod
+#     def display_2(self):
+#         pass
+#
+#
+# class Child(Father):
+#     def display_1(self):
+#         print('Child')
+#
+#
+# class Grandchild(Child):
+#     def display_2(self):
+#         print('Grandchild')
+#
+#
+# # one = Father()  # TypeError
+# # two = Child()  # TypeError
+# three = Grandchild()
+# three.display_1()
+# three.display_2()
+
+
+# -----------------------------------------------------
+# Вложенные классы, видимость методов
+# Видны: статические переменные, staticmethod, classmethod
+# Не видны: non-static свойства и методы
+
+
+# class MyOuter:
+#     age = 18
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#     @staticmethod
+#     def static_method():
+#         print('Static method')
+#
+#     def outer_method(self):
+#         print('Метод в наружном классе')
+#
+#     class MyInner:
+#         def __init__(self, inner_name, obj):
+#             self.inner_name = inner_name
+#             self.obj = obj
+#
+#         def inner_method(self):
+#             print('Inner class', MyOuter.age, self.obj.name)
+#             MyOuter.static_method()
+#             self.obj.outer_method()
+#
+#
+# # out = MyInner()  # NameError
+# out = MyOuter('outer')
+# inner = out.MyInner('inner', out)
+# print(inner.inner_name)
+#
+# inner.inner_method()
+
+
+# class Color:
+#     def __init__(self):
+#         self.name = 'Green'
+#         self.lg = self.LightGreen()
+#
+#     def show(self):
+#         print('Name:', self.name)
+#
+#     class LightGreen:
+#         def __init__(self):
+#             self.name = 'Light Green'
+#
+#         def display(self):
+#             print('Name:', self.name)
+#
+#
+# outer = Color()
+# outer.show()
+# # outer.display()  # AttributeError
+# outer.lg.display()
+#
+# g = outer.lg
+# g.display()
+
+# class Intern:
+#     def __init__(self):
+#         self.name = "Smith"
+#
+#     def display(self):
+#         print("Name:", self.name)
+#
+#
+# class Employee:
+#     def __init__(self):
+#         self.name = "Employee"
+#         self.intern = Intern()
+#         self.head = self.Head()
+#
+#     def show(self):
+#         print("Name:", self.name)
+#
+#     class Head:
+#         def __init__(self):
+#             self.name = "Alba"
+#
+#         def display(self):
+#             print("Name:", self.name)
+#
+#
+# outer = Employee()
+# outer.show()
+#
+# d1 = outer.intern
+# d1.display()
+#
+# d2 = outer.head
+# d2.display()
+
+
+# class Outer:
+#     def __init__(self):
+#         self.inner = self.Inner()
+#
+#     def show(self):
+#         print('Class Outer')
+#
+#     class Inner:
+#         def __init__(self):
+#             self.inner_inner = self.InnerClass()
+#
+#         def show(self):
+#             print('Class Inner')
+#
+#         class InnerClass:
+#             def show(self):
+#                 print('Class InnerClass')
+#
+#
+# outer = Outer()
+# outer.show()
+#
+# inner1 = outer.inner
+# inner1.show()
+#
+# inner2 = inner1.inner_inner
+# inner2.show()
+#
+# inner3 = outer.inner.inner_inner
+# inner3.show()
+
+
+# class Computer:
+#     def __init__(self):
+#         self.name = 'PC001'
+#         # self.os = self.OS()
+#         # self.cpu = self.CPU()
+#
+#     class OS:
+#         def system(self):
+#             return 'Windows 10'
+#
+#     class CPU:
+#         def make(self):
+#             return 'Intel'
+#
+#         def model(self):
+#             return 'Core-i7'
+#
+#
+# comp = Computer()
+# # my_os = comp.os
+# # my_cpu = comp.cpu
+#
+# print(comp.name)
+# print(comp.OS().system())
+# print(comp.CPU().make())
+# print(comp.CPU().model())
