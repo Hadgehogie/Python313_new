@@ -5123,3 +5123,21 @@
 # print(comp.OS().system())
 # print(comp.CPU().make())
 # print(comp.CPU().model())
+
+
+class Cat:
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):  # По умолчанию (ВСЕГДА) отрабатывает в консоли и со многими объектами
+        return f'{self.__class__}: {self.name}'
+
+    def __str__(self):  # Метод __str__ имеет приоритет над методом __repr__
+        return f'{self.name}'
+
+
+cat = Cat('Пушок')
+print(cat)
+
+cat1 = [Cat('Пушок')]
+print(cat1)
