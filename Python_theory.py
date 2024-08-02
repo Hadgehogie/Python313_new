@@ -17,6 +17,8 @@
 # print(type(a))  # bool - True, False
 # import re
 # import re
+# import math
+
 
 # a = 4
 # b = 5
@@ -5125,19 +5127,331 @@
 # print(comp.CPU().model())
 
 
-class Cat:
-    def __init__(self, name):
-        self.name = name
+# class Cat:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def __repr__(self):  # По умолчанию (ВСЕГДА) отрабатывает в консоли и со многими объектами
+#         return f'{self.__class__}: {self.name}'
+#
+#     def __str__(self):  # Метод __str__ имеет приоритет над методом __repr__
+#         return f'{self.name}'
+#
+#
+# cat = Cat('Пушок')
+# print(cat)
+#
+# cat1 = [Cat('Пушок')]
+# print(cat1)
 
-    def __repr__(self):  # По умолчанию (ВСЕГДА) отрабатывает в консоли и со многими объектами
-        return f'{self.__class__}: {self.name}'
 
-    def __str__(self):  # Метод __str__ имеет приоритет над методом __repr__
-        return f'{self.name}'
+# class Point:
+#     def __init__(self, *args):
+#         self.__coord = args
+#
+#     def __len__(self):
+#         return len(self.__coord)
+#
+#
+# p = Point(1, 2, 3)
+# print(len(p))  # TypeError -> 3
 
 
-cat = Cat('Пушок')
-print(cat)
+# class Point:
+#     __slots__ = ('x', 'y', '__length')
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#         self.length = math.sqrt(x ** 2 + y ** 2)
+#
+#     @property
+#     def length(self):
+#         return self.__length
+#
+#     @length.setter
+#     def length(self, value):
+#         self.__length = value
+#
+#
+# p = Point(1, 2)
+# print(p.length)
+#
+# p.length = 20
+# print(p.length)
 
-cat1 = [Cat('Пушок')]
-print(cat1)
+
+# class Point:
+#     __slots__ = ('x', 'y')
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#
+# class Point2D:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#
+# pt1 = Point(1, 2)
+# pt2 = Point2D(1, 2)
+#
+# print('pt1 =', pt1.__sizeof__())
+# print('pt2 =', pt2.__sizeof__() + pt2.__dict__.__sizeof__())
+#
+# # print(pt1.__dict__)  # AttributeError
+# print(pt2.__dict__)
+
+
+# class Point:
+#     __slots__ = ('x', 'y')
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#
+# class Point3D(Point):
+#     __slots__ = 'z',
+#
+#     def __init__(self, x, y, z):
+#         super().__init__(x, y)
+#         self.z = z
+#
+#
+# pt1 = Point(1, 2)
+# pt3 = Point3D(10, 20, 25)
+#
+# pt3.z = 30
+# print(pt3.x, pt3.y, pt3.z)
+
+
+# -----------------------------------------------------
+# Множественное наследование
+
+
+# class Creature:
+#     def __init__(self, name):
+#         self.name = name
+#
+#
+# class Animal(Creature):
+#     def sleep(self):
+#         print(self.name + ' is sleeping')
+#
+#
+# class Pet(Creature):
+#     def play(self):
+#         print(self.name + ' is playing')
+#
+#
+# class Dog(Animal, Pet):
+#     def __init__(self):
+#         print('Инициализатор Dog')
+#
+#     def bark(self):
+#         print(self.name + ' is barking')
+#
+#
+# dog = Dog('Buddy')
+# dog.bark()
+# dog.play()
+# dog.sleep()
+
+
+# class A:
+#     def __init__(self):
+#         print('Инициализатор класса A')
+#
+#     def hi(self):
+#         print('A')
+#
+#
+# class AA:
+#     def __init__(self):
+#         print('Инициализатор класса AA')
+#
+#     def hi(self):
+#         print('AA')
+#
+#
+# class B(A):
+#     def __init__(self):
+#         print('Инициализатор класса B')
+#
+#     # def hi(self):
+#     #     print('B')
+#
+#
+# class C(AA):
+#     def __init__(self):
+#         print('Инициализатор класса C')
+#
+#     # def hi(self):
+#     #     print('C')
+#
+#
+# class D(B, C):
+#     def __init__(self):
+#         # super().__init__()
+#         C.__init__(self)
+#         B.__init__(self)
+#         print('Инициализатор класса D')
+#
+#
+# d = D()
+# d.hi()
+# print(D.mro())  # list
+# print(D.__mro__)  # tuple
+
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f'({self.__x}, {self.__y})'
+#
+#
+# class Styles:
+#     def __init__(self, color='red', width=1):
+#         print('Инициализатор Styles')
+#         self._color = color
+#         self._width = width
+#
+#
+# class A:
+#     def __init__(self):
+#         print("Инициализатор A")
+#
+#
+# class Pos(A):
+#     def __init__(self, sp: Point, ep: Point, color='red', width=1):
+#         print('Инициализатор Pos')
+#         self._sp = sp
+#         self._ep = ep
+#         # super().__init__(color, width)
+#         Styles.__init__(self, color, width)
+#
+#
+# class Line(Pos, Styles):
+#     def draw(self):
+#         print(f'Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}')
+#
+#
+# l1 = Line(Point(10, 10), Point(100, 100), 'green', 5)
+# l1.draw()
+# print(Line.mro())
+
+
+# -----------------------------------------------------
+# Классы Миксины - создают дополнительный функционал при множественном наследовании классов
+
+
+# class Displayer:
+#     @staticmethod
+#     def display(message):
+#         print(message)
+#
+#
+# class LoggerMixin:
+#     def log(self, message, filename='logfile.txt'):
+#         with open(filename, 'a') as fh:
+#             fh.write(message)
+#
+#     def display(self, message):
+#         Displayer.display(message)
+#         self.log(message)
+#
+#
+# class MySubClass(LoggerMixin, Displayer):
+#     def log(self, message, filename=''):
+#         super().log(message, filename='sublog.txt')
+#
+#
+# subclass = MySubClass()
+# subclass.display('Строка будет отображаться и запишется в файл')
+
+
+# class Goods:
+#     def __init__(self, name, weight, price):
+#         print('Инициализатор Goods')
+#         self.name = name
+#         self.weight = weight
+#         self.price = price
+#         super().__init__()
+#
+#     def print_info(self):
+#         print(f'{self.name}, {self.weight}, {self.price}')
+#
+#
+# class MixinLog:
+#     ID = 0
+#
+#     def __init__(self):
+#         print("Инициализатор MixinLog")
+#         MixinLog.ID += 1
+#         self.id = MixinLog.ID
+#
+#     def save_sell_log(self):
+#         print(f'{self.id}: товар был продан в 00:00')
+#
+#
+# class NoteBook(Goods, MixinLog):
+#     pass
+#
+#
+# n = NoteBook("HP", 1.5, 35000)
+# n.print_info()
+# n.save_sell_log()
+#
+# n2 = NoteBook('LTE', 2.0, 48000)
+# n2.save_sell_log()
+
+
+# -----------------------------------------------------
+# Перегрузка операторов
+
+
+# class Clock:
+#     DAY = 86400
+#
+#     def __init__(self, sec):
+#         if not isinstance(sec, int):
+#             raise TypeError("Секунды должны быть выражены целым числом")
+#         self.sec = sec % self.DAY
+#
+#     def get_format_time(self):
+#         s = self.sec % 60
+#         n = (self.sec // 60) % 60
+#         h = (self.sec // 3600) % 24
+#         return f'{Clock.get_form(h)}:{Clock.get_form(n)}:{Clock.get_form(s)}'
+#
+#     @staticmethod
+#     def get_form(x):
+#         return str(x) if x > 9 else '0' + str(x)
+#
+#     def __add__(self, other):
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError('Правый операнд должен быть выражен типом данных Clock')
+#         return Clock(self.sec + other.sec)
+#
+#
+# c1 = Clock(100)
+# print(c1.get_format_time())
+#
+# c2 = Clock(200)
+# # c2 = 'abc'
+# print(c2.get_format_time())
+#
+# # c4 = Clock(300)
+# # print(c4.get_format_time())
+# #
+# # c3 = c1 + c2 + c4
+# # print(c3.get_format_time())
+#
+# c2 += c1
+# print(c2.get_format_time())
