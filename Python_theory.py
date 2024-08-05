@@ -5439,19 +5439,214 @@
 #             raise ArithmeticError('Правый операнд должен быть выражен типом данных Clock')
 #         return Clock(self.sec + other.sec)
 #
+#     def __eq__(self, other):
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError('Правый операнд должен быть выражен типом данных Clock')
+#         return self.sec == other.sec
 #
-# c1 = Clock(100)
+#     def __ne__(self, other):
+#         return not self.__eq__(other)
+#
+#     def __lt__(self, other):
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError('Правый операнд должен быть выражен типом данных Clock')
+#         return self.sec < other.sec
+#
+#     def __le__(self, other):
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError('Правый операнд должен быть выражен типом данных Clock')
+#         return self.sec <= other.sec
+#
+#     def __gt__(self, other):
+#         return not self.__le__(other)
+#
+#     def __ge__(self, other):
+#         return not self.__lt__(other)
+#
+#     def __getitem__(self, item):
+#         if not isinstance(item, str):
+#             raise ValueError('Ключ должен быть выражен строкой')
+#         if item == 'hour':
+#             return (self.sec // 3600) % 24
+#         elif item == 'min':
+#             return (self.sec // 60) % 60
+#         elif item == 'sec':
+#             return self.sec % 60
+#         return 'Неверный ключ'
+#
+#     def __setitem__(self, key, value):
+#         if not isinstance(key, str):
+#             raise TypeError('Ключ должен быть выражен строкой')
+#         if not isinstance(value, int):
+#             raise TypeError('Значение должно быть выражено целым числом')
+#
+#         s = self.sec % 60
+#         n = (self.sec // 60) % 60
+#         h = (self.sec // 3600) % 24
+#         if key == 'hour':
+#             self.sec = s + 60 * n + value * 3600
+#         if key == 'min':
+#             self.sec = s + 60 * value + h * 3600
+#         if key == 'sec':
+#             self.sec = value + 60 * n + h * 3600
+#
+#
+# c1 = Clock(80000)
 # print(c1.get_format_time())
 #
-# c2 = Clock(200)
+# c1['hour'] = 11
+# print(c1.get_format_time())
+#
+# c1['min'] = 25
+# print(c1.get_format_time())
+#
+# c1['sec'] = 150
+# print(c1.get_format_time())
+
+# c2 = Clock(100)
 # # c2 = 'abc'
 # print(c2.get_format_time())
+
+# c4 = Clock(300)
+# print(c4.get_format_time())
 #
-# # c4 = Clock(300)
-# # print(c4.get_format_time())
-# #
-# # c3 = c1 + c2 + c4
-# # print(c3.get_format_time())
-#
+# c3 = c1 + c2 + c4
+# print(c3.get_format_time())
+
 # c2 += c1
 # print(c2.get_format_time())
+#
+#
+# if c1 == c2:
+#     print("Время одно")
+# else:
+#     print("Время разное")
+#
+# if c1 != c2:
+#     print("Время разное")
+# else:
+#     print("Время одно")
+#
+# print(f'c2 > c1 {c2 > c1}')
+# print(f'c2 >= c1 {c2 >= c1}')
+# print(f'c2 < c1 {c2 < c1}')
+# print(f'c2 <= c1 {c2 <= c1}')
+
+
+# class Student:
+#     def __init__(self, name, *marks):
+#         self.name = name
+#         self.marks = list(marks)
+#
+#     def __getitem__(self, item):
+#         if 0 <= item <= len(self.marks):
+#             return self.marks[item]
+#         else:
+#             raise IndexError("Неверно введено значение индекса")
+#
+#     def __setitem__(self, key, value):
+#         if not isinstance(key, int) or key < 0:
+#             raise TypeError('Индекс должен быть выражен целым неотрицательным числом')
+#         if key > len(self.marks):
+#             off = key + 1 - len(self.marks)
+#             self.marks.extend([None] * off)
+#         self.marks[key] = value
+#
+#     def __delitem__(self, key):
+#         if not isinstance(key, int):
+#             raise TypeError('Индекс должен быть выражен целым числом')
+#         # if not 0 <= key <= len(self.marks):
+#         if key not in range(len(self.marks)):
+#             raise IndexError('Индекс находится за пределами допустимого диапазона значений')
+#         del self.marks[key]
+#
+#
+# s1 = Student('Сергей', 5, 5, 3, 4, 5)
+# # print(s1.name)
+# # print(s1.marks[2])
+# print(s1[2])
+#
+# s1[10] = 4
+# print(s1.marks)
+#
+# del s1[2]
+# print(s1.marks)
+
+
+# from random import choice, randint
+#
+#
+# class Cat:
+#     def __init__(self, name, age, pol):
+#         self.name = name
+#         self.age = age
+#         self.pol = pol
+#
+#     def __str__(self):
+#         if self.pol == 'M':
+#             return f'{self.name} is a good boy!!!'
+#         elif self.pol == 'F':
+#             return f'{self.name} is a good girl!!!'
+#         else:
+#             return f'{self.name} is a good kitten!!!'
+#
+#     def __repr__(self):
+#         return f"Cat(name='{self.name}', age={self.age}, pol='{self.pol}')"
+#
+#     def __add__(self, other):
+#         if (self.pol == 'M' and other.pol == 'F') or (self.pol == 'F' and other.pol == 'M'):
+#             return [Cat('No name', 0, choice(['M', 'F'])) for _ in range(randint(1, 5))]
+#         else:
+#             raise TypeError('Unsupported types are crossed')
+#
+#
+# cat1 = Cat('Tom', 4, 'M')
+# cat2 = Cat('Elsa', 5, 'F')
+# cat3 = Cat('Murzik', 4, 'M')
+#
+# print(cat1)
+# print(cat2)
+# print(cat3)
+#
+# print(cat1 + cat2)
+
+
+class Rectangle:
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+
+    def get_perimetr(self):
+        return 2 * (self.w + self.h)
+
+
+class Square:
+    def __init__(self, a):
+        self.a = a
+
+    def get_perimetr(self):
+        return 4 * self.a
+
+
+class Triangle:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def get_perimetr(self):
+        return self.a + self.b + self.c
+
+
+r1 = Rectangle(1, 2)
+r2 = Rectangle(3, 4)
+
+s1 = Square(10)
+s2 = Square(20)
+
+t1 = Triangle(1, 2, 3)
+t2 = Triangle(4, 5, 6)
+
+shape = [r1, r2, s1, s2, t1, t2]
+for g in shape:
+    print(g.get_perimetr())
