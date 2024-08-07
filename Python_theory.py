@@ -5611,42 +5611,323 @@
 # print(cat1 + cat2)
 
 
-class Rectangle:
-    def __init__(self, w, h):
-        self.w = w
-        self.h = h
+# class Rectangle:
+#     def __init__(self, w, h):
+#         self.w = w
+#         self.h = h
+#
+#     def get_perimetr(self):
+#         return 2 * (self.w + self.h)
+#
+#
+# class Square:
+#     def __init__(self, a):
+#         self.a = a
+#
+#     def get_perimetr(self):
+#         return 4 * self.a
+#
+#
+# class Triangle:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+#
+#     def get_perimetr(self):
+#         return self.a + self.b + self.c
+#
+#
+# r1 = Rectangle(1, 2)
+# r2 = Rectangle(3, 4)
+#
+# s1 = Square(10)
+# s2 = Square(20)
+#
+# t1 = Triangle(1, 2, 3)
+# t2 = Triangle(4, 5, 6)
+#
+# shape = [r1, r2, s1, s2, t1, t2]
+# for g in shape:
+#     print(g.get_perimetr())
 
-    def get_perimetr(self):
-        return 2 * (self.w + self.h)
+
+# -----------------------------------------------------
+# Функторы
 
 
-class Square:
-    def __init__(self, a):
-        self.a = a
+# class Counter:
+#     def __init__(self):
+#         self.__count = 0
+#
+#     def __call__(self, *args, **kwargs):
+#         self.__count += 1
+#         print(self.__count)
+#
+#
+# c1 = Counter()
+# c1()  # 1
+# c1()  # 2
+# c1()  # 3
+#
+# c2 = Counter()
+# c2()  # 1
+#
+# c1()  # 4
 
-    def get_perimetr(self):
-        return 4 * self.a
+
+# class StripChars:
+#     def __init__(self, chars):
+#         self.__chars = chars
+#
+#     def __call__(self, *args, **kwargs):
+#         if not isinstance(args[0], str):
+#             raise TypeError("Вводимый аргумент должен быть выражен строкой")
+#         return args[0].strip(self.__chars)
+#
+#
+# s1 = StripChars("?:!.; ")
+# print(s1(" He?llo World!  "))
+# # print(s1(50))
 
 
-class Triangle:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
+# def strip_chars(chars):
+#     def wrap(string):
+#         if not isinstance(string, str):
+#             raise TypeError("Вводимый аргумент должен быть выражен строкой")
+#         return string.strip(chars)
+#
+#     return wrap
+#
+#
+# s2 = strip_chars("?:!.; ")
+# print(s2(" He?llo World!  "))
 
-    def get_perimetr(self):
-        return self.a + self.b + self.c
+
+# class MyDecorator:
+#     def __init__(self, func):
+#         self.func = func
+#
+#     def __call__(self):
+#         print('Перед вызовом функции')
+#         self.func()
+#         print('После вызова функции')
+#
+#
+# @MyDecorator
+# def function():
+#     print("Текст функции")
+#
+#
+# function()
 
 
-r1 = Rectangle(1, 2)
-r2 = Rectangle(3, 4)
+# class MyDecorator:
+#     def __init__(self, func):
+#         self.func = func
+#
+#     def __call__(self, x, y):
+#         return f'Перед вызовом функции \n{self.func(x, y)} \nПосле вызова функции'
+#
+#
+# @MyDecorator
+# def function(a, b):
+#     return a * b
+#
+#
+# print(function(2, 5))
 
-s1 = Square(10)
-s2 = Square(20)
 
-t1 = Triangle(1, 2, 3)
-t2 = Triangle(4, 5, 6)
+# class Power:
+#     def __init__(self, func):
+#         self.func = func
+#
+#     def __call__(self, a, b):
+#         return self.func(a, b) ** 2
+#
+#
+# @Power
+# def function(a, b):
+#     return a * b
+#
+#
+# print("Результат:", function(2, 3))
 
-shape = [r1, r2, s1, s2, t1, t2]
-for g in shape:
-    print(g.get_perimetr())
+
+# class MyDecorator:
+#     def __init__(self, arg):
+#         self.name = arg
+#
+#     def __call__(self, func):
+#         def wrap(*args, **kwargs):
+#             return f'Перед вызовом функции ({self.name})\n{func(*args, **kwargs)} \nПосле вызова функции ({self.name})'
+#
+#         return wrap
+#
+#
+# @MyDecorator("два параметра")
+# def function(a, b):
+#     return a * b
+#
+#
+# @MyDecorator("три параметра")
+# def function1(a, b, c):
+#     return a * b * c
+#
+#
+# print(function(2, 5))
+# print(function1(2, 5, 2))
+
+
+# class Power:
+#     def __init__(self, arg):
+#         self.power = arg
+#
+#     def __call__(self, func):
+#         def wrap(*args, **kwargs):
+#             return f'Результат: {func(*args, **kwargs) ** self.power}'
+#
+#         return wrap
+#
+#
+# @Power(3)
+# def function(a, b):
+#     return a * b
+#
+#
+# print(function(2, 2))
+
+
+# -----------------------------------------------------
+# Декорирование методов
+
+
+# def dec(fn):
+#     def wrap(*args, **kwargs):
+#         print("*" * 20)
+#         fn(*args, **kwargs)
+#         print("*" * 20)
+#
+#     return wrap
+#
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     @dec
+#     def info(self):
+#         print(f'{self.name} {self.surname}')
+#
+#
+# p1 = Person("Виталий", "Карасев")
+# p1.info()
+
+
+# def decorator(cls):
+#     class Wrapper(cls):
+#         def doubler(self, value):
+#             return value * 2
+#
+#     return Wrapper
+#
+#
+# @decorator
+# class ActualClass:
+#     def __init__(self):
+#         print("Инициализатор класса ActualClass")
+#
+#     def quad(self, value):
+#         return value * 4
+#
+#
+# obj = ActualClass()
+# print(obj.quad(4))
+# print(obj.doubler(4))
+
+
+# -----------------------------------------------------
+# Дескрипторы (__get__, __set__, __delete__, __set_name__)
+
+
+# class String:
+#     def __init__(self, value=None):
+#         print("Инициализатор String:", value)
+#         if value:
+#             self.set(value)
+#
+#     def set(self, value):
+#         if not isinstance(value, str):
+#             raise TypeError(f"{value} должно быть строкой")
+#         self.__value = value
+#
+#     def get(self):
+#         return self.__value
+#
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = String(name)
+#         self.surname = String(surname)
+#
+#     # @property
+#     # def name(self):
+#     #     return self.__name
+#     #
+#     # @name.setter
+#     # # def name(self, value):
+#     #     if not isinstance(value, str):
+#     #         raise TypeError(f"{value} должно быть строкой")
+#     #     self.__name = value
+#     #
+#     # @property
+#     # def surname(self):
+#     #     return self.__surname
+#     #
+#     # @surname.setter
+#     # def surname(self, value):
+#     #     if not isinstance(value, str):
+#     #         raise TypeError(f"{value} должно быть строкой")
+#     #     self.__surname = value
+#
+#
+# p = Person("Ivan", "Petrov")
+# p.name.set("Harry")
+# p.surname.set("Potter")
+# print(p.name.get())
+# print(p.surname.get())
+
+
+# class ValidString:
+#     def __set_name__(self, owner, name):
+#         # print(owner)  # класс
+#         self.__name = name
+#
+#     def __get__(self, instance, owner):
+#         # print(instance)  # экземпляр класса
+#         return instance.__dict__[self.__name]
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, str):
+#             raise TypeError(f"{self.__name} должно быть выражено строкой")
+#         instance.__dict__[self.__name] = value
+#
+#
+# class Person:
+#     name = ValidString()
+#     surname = ValidString()
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#
+# p = Person("Ivan", "Petrov")
+# print(p.name)
+# print(p.surname)
+# print(p.__dict__)
+#
+# p.name = "Harry"
+# p.surname = "Potter"
+# print(p.__dict__)
