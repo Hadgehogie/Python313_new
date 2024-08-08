@@ -6042,49 +6042,63 @@
 # e_car.description_battery()
 
 
-class PayrollSystem:
-    def calculate(self, employees):
-        print("Расчет заработной платы:")
-        print("*" * 50)
-        for employee in employees:
-            print(f"Заработная плата: {employee.id} - {employee.name}")
-            print(f"- Проверить сумму: {employee.calculate_payroll()}")
-            print()
-
-
-class Employee:
-    def __init__(self, id_employee, name):
-        self.id = id_employee
-        self.name = name
-
-
-class SalaryEmployee(Employee):
-    """Административные работники с фиксированной зарплатой"""
-
-    def __init__(self, id_employee, name, weekly_salary):
-        super().__init__(id_employee, name)
-        self.weekly_salary = weekly_salary
-
-    def calculate_payroll(self):
-        return self.weekly_salary
-
-
-class HourlyEmployee(Employee):
-    """Сотрудники с почасовой оплатой"""
-
-    def __init__(self, id_employee, name, hours_worked, hour_rate):
-        super().__init__(id_employee, name)
-        self.hours_worked = hours_worked
-        self.hour_rate = hour_rate
-
-    def calculate_payroll(self):
-        return self.hours_worked * self.hour_rate
-
-
-salary_employee = SalaryEmployee(1, "Валерий Задорожный", 1500)
-hourly_employee = HourlyEmployee(2, "Илья Кронин", 40, 15)
-payroll_system = PayrollSystem()
-payroll_system.calculate([
-    salary_employee,
-    hourly_employee
-])
+# class PayrollSystem:
+#     def calculate(self, employees):
+#         print("Расчет заработной платы:")
+#         print("*" * 50)
+#         for employee in employees:
+#             print(f"Заработная плата: {employee.id} - {employee.name}")
+#             print(f"- Проверить сумму: {employee.calculate_payroll()}")
+#             print()
+#
+#
+# class Employee:
+#     def __init__(self, id_employee, name):
+#         self.id = id_employee
+#         self.name = name
+#
+#
+# class SalaryEmployee(Employee):
+#     """Административные работники с фиксированной зарплатой"""
+#
+#     def __init__(self, id_employee, name, weekly_salary):
+#         super().__init__(id_employee, name)
+#         self.weekly_salary = weekly_salary
+#
+#     def calculate_payroll(self):
+#         return self.weekly_salary
+#
+#
+# class HourlyEmployee(Employee):
+#     """Сотрудники с почасовой оплатой"""
+#
+#     def __init__(self, id_employee, name, hours_worked, hour_rate):
+#         super().__init__(id_employee, name)
+#         self.hours_worked = hours_worked
+#         self.hour_rate = hour_rate
+#
+#     def calculate_payroll(self):
+#         return self.hours_worked * self.hour_rate
+#
+#
+# class CommissionEmployee(SalaryEmployee):
+#     """Торговые представители, получающие фиксированную оплату и комиссию сверху"""
+#
+#     def __init__(self, id_employee, name, weekly_salary, commission):
+#         super().__init__(id_employee, name, weekly_salary)
+#         self.commission = commission
+#
+#     def calculate_payroll(self):
+#         return self.weekly_salary + self.commission
+#
+#
+# salary_employee = SalaryEmployee(1, "Валерий Задорожный", 1500)
+# hourly_employee = HourlyEmployee(2, "Илья Кронин", 40, 15)
+# commission_employee = CommissionEmployee(3, "Николай Хорольский", 1100, 150)
+#
+# payroll_system = PayrollSystem()
+# payroll_system.calculate([
+#     salary_employee,
+#     hourly_employee,
+#     commission_employee
+# ])
