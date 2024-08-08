@@ -17,7 +17,7 @@
 # print(type(a))  # bool - True, False
 # import re
 # import re
-# import math
+# import Geometry
 
 
 # a = 4
@@ -1088,21 +1088,21 @@
 
 # -----------------------------------------------------
 # Математические операции
-# import math
+# import Geometry
 
-# import math
+# import Geometry
 #
-# num1 = math.sqrt(121)  # 11.0
-# num2 = math.ceil(3.1)  # Округление в верхнюю сторону
-# num3 = math.floor(3.8)  # Округление в нижнюю сторону
+# num1 = Geometry.sqrt(121)  # 11.0
+# num2 = Geometry.ceil(3.1)  # Округление в верхнюю сторону
+# num3 = Geometry.floor(3.8)  # Округление в нижнюю сторону
 #
 # print(num1)
 # print(num2)
 # print(num3)
-# print(math.pi)
+# print(Geometry.pi)
 
-# import math as m  # from math import *
-# from math import sqrt, ceil
+# import Geometry as m  # from Geometry import *
+# from Geometry import sqrt, ceil
 #
 # num1 = sqrt(4)
 # num2 = ceil(3.1)
@@ -2724,7 +2724,7 @@
 # print(len.__doc__)
 
 
-# from math import pi
+# from Geometry import pi
 #
 #
 # def cylinder(r, h):
@@ -4188,7 +4188,7 @@
 # print(f'Факториал числа: {Maths.fact(5)}')
 
 
-# from math import sqrt
+# from Geometry import sqrt
 #
 #
 # class Area:
@@ -5163,7 +5163,7 @@
 #     def __init__(self, x, y):
 #         self.x = x
 #         self.y = y
-#         self.length = math.sqrt(x ** 2 + y ** 2)
+#         self.length = Geometry.sqrt(x ** 2 + y ** 2)
 #
 #     @property
 #     def length(self):
@@ -5931,3 +5931,160 @@
 # p.name = "Harry"
 # p.surname = "Potter"
 # print(p.__dict__)
+
+
+# class ValidValue:
+#     @staticmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int):
+#             raise TypeError(f"Координата {coord} должна быть выражена целочисленным значением")
+#
+#     def __set_name__(self, owner, name):
+#         self.__name = "_" + name
+#
+#     def __get__(self, instance, owner):
+#         # return instance.__dict__[self.__name]
+#         return getattr(instance, self.__name)
+#
+#     def __set__(self, instance, value):
+#         self.verify_coord(value)
+#         # instance.__dict__[self.__name] = value
+#         setattr(instance, self.__name, value)
+#
+#
+# class Point3D:
+#     x = ValidValue()
+#     y = ValidValue()
+#     z = ValidValue()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#
+# p1 = Point3D(1, 2, 3)
+# p1.x = 20
+# print(p1.x)
+# print(p1.__dict__)
+
+
+# -----------------------------------------------------
+# Метаклассы - классы, создающие другие классы
+
+# a = 5
+# print(type(a))  # int
+# print(type(int))  # type
+
+
+# class MyList(list):
+#     def get_length(self):
+#         return len(self)
+#
+#
+# lst = MyList()
+# lst.append(5)
+# lst.append(8)
+# print(lst, lst.get_length())
+#
+#
+# MyList1 = type(
+#     "MyList1",
+#     (list, ),
+#     dict(get_length=lambda self: len(self))
+# )
+#
+#
+# lst1 = MyList1()
+# lst1.append(5)
+# lst1.append(8)
+# print(lst1, lst1.get_length())
+#
+# print(MyList.__dict__)
+# print(MyList1.__dict__)
+
+
+# import Geometry.rect
+# import Geometry.sq
+# import Geometry.trian
+
+# from Geometry import rect, sq, trian
+
+# from Geometry import *
+
+# print('Hello')
+#
+#
+# def run():
+#     r1 = rect.Rectangle(1, 2)
+#     r2 = rect.Rectangle(3, 4)
+#
+#     s1 = sq.Square(10)
+#     s2 = sq.Square(20)
+#
+#     t1 = trian.Triangle(1, 2, 3)
+#     t2 = trian.Triangle(4, 5, 6)
+#
+#     shape = [r1, r2, s1, s2, t1, t2]
+#
+#     for g in shape:
+#         print(g.get_perimetr())
+#
+#
+# if __name__ == '__main__':
+#     run()
+
+
+# from Car.electrocar import ElectroCar
+#
+# e_car = ElectroCar('Tesla', 'T', 2018, 99000)
+# e_car.show_car()
+# e_car.description_battery()
+
+
+class PayrollSystem:
+    def calculate(self, employees):
+        print("Расчет заработной платы:")
+        print("*" * 50)
+        for employee in employees:
+            print(f"Заработная плата: {employee.id} - {employee.name}")
+            print(f"- Проверить сумму: {employee.calculate_payroll()}")
+            print()
+
+
+class Employee:
+    def __init__(self, id_employee, name):
+        self.id = id_employee
+        self.name = name
+
+
+class SalaryEmployee(Employee):
+    """Административные работники с фиксированной зарплатой"""
+
+    def __init__(self, id_employee, name, weekly_salary):
+        super().__init__(id_employee, name)
+        self.weekly_salary = weekly_salary
+
+    def calculate_payroll(self):
+        return self.weekly_salary
+
+
+class HourlyEmployee(Employee):
+    """Сотрудники с почасовой оплатой"""
+
+    def __init__(self, id_employee, name, hours_worked, hour_rate):
+        super().__init__(id_employee, name)
+        self.hours_worked = hours_worked
+        self.hour_rate = hour_rate
+
+    def calculate_payroll(self):
+        return self.hours_worked * self.hour_rate
+
+
+salary_employee = SalaryEmployee(1, "Валерий Задорожный", 1500)
+hourly_employee = HourlyEmployee(2, "Илья Кронин", 40, 15)
+payroll_system = PayrollSystem()
+payroll_system.calculate([
+    salary_employee,
+    hourly_employee
+])

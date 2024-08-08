@@ -9,7 +9,7 @@ def triangle(x, y):
 
 
 def circle(x):
-    from math import pi
+    from Geometry import pi
     return pi * x ** 2
 
 

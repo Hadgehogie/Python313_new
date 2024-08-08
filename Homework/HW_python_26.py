@@ -25,7 +25,7 @@ class Rectangle:
 
     @staticmethod
     def hypotenuse(a, b):
-        from math import sqrt
+        from Geometry import sqrt
         return round(sqrt(a ** 2 + b ** 2), 2)
 
     @staticmethod

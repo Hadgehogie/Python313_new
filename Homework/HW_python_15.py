@@ -1,6 +1,6 @@
 # Создать лямбда-выражения для нахождения площадей фигур
 
-from math import pi
+from Geometry import pi
 
 area = {
     'circle': lambda r: pi * (r ** 2),
