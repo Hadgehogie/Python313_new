@@ -6102,3 +6102,180 @@
 #     hourly_employee,
 #     commission_employee
 # ])
+
+
+# -----------------------------------------------------
+# Упаковка и распаковка данных (сериализация, десериализация)
+
+# Основные модули: pickle (только python), json (универсальный)
+# dump() - сохраняет данные в открытый файл
+# dumps() - сохраняет данные в строку
+# load() - считывает данные из открытого файла
+# loads() - считывает данные из строки
+
+
+# import pickle
+
+
+# file_name = "basket.txt"
+#
+# shop_list = {
+#     "fruit": ["apples", "mango"],
+#     "vegetables": ["carrot"],
+#     "budget": 1000
+# }
+#
+# with open(file_name, "wb") as fh:
+#     pickle.dump(shop_list, fh)
+#
+# with open(file_name, "rb") as fh:
+#     shop_list_2 = pickle.load(fh)
+#
+# print(shop_list_2)
+
+
+# class Test:
+#     num = 35
+#     st = "привет"
+#     lst = [1, 2, 3]
+#     tpl = (22, 23)
+#
+#     def __str__(self):
+#         return f'Число: {Test.num} \nСтрока: {Test.st} \nСписок: {Test.lst} \nКортеж: {Test.tpl}'
+#
+#
+# obj = Test()
+# obj1 = pickle.dumps(obj)
+# print(f"Cериализация в строку: \n{obj1}\n")
+#
+# obj2 = pickle.loads(obj1)
+# print(f"Десериализация из строки: \n{obj2}")
+
+
+# class Test2:
+#     def __init__(self):
+#         self.a = 35
+#         self.b = "test"
+#         self.c = lambda x: x * x
+#
+#     def __str__(self):  # print()
+#         return f'{self.a}, {self.b}, {self.c(9)}'
+#
+#     def __getstate__(self):  # dumps()
+#         attr = self.__dict__.copy()
+#         del attr['c']
+#         return attr
+#
+#     def __setstate__(self, state):  # loads()
+#         self.__dict__ = state
+#         self.c = lambda x: x * x
+#
+#
+# item1 = Test2()
+# print(item1)
+# item2 = pickle.dumps(item1)
+# # print(item2)
+# item3 = pickle.loads(item2)
+# print(item3)
+# print(item3.__dict__)
+
+
+# import json
+
+# data = {
+#     'name': 'Olga',
+#     'age': 35,
+#     '20': None,
+#     'hobbies': ('running', 'singing'),
+#     'children': [
+#         {
+#             'first_name': 'Alice',
+#             'True': 1
+#         }
+#     ]
+# }
+#
+# file_name = "data_file.json"
+
+# with open(file_name, "w") as fw:
+#     json.dump(data, fw, indent=4)
+#
+#
+# with open(file_name, 'r') as fw:
+#     data1 = json.load(fw)
+#
+# print(data1)
+
+# json_string = json.dumps(data, sort_keys=True)
+# print(json_string)
+# print(type(json_string))
+#
+# data1 = json.loads(json_string)
+# print(data1)
+# print(data1['hobbies'])
+# print(type(data1))
+
+
+# x = {
+#     "name": "Виктор"
+# }
+# print(json.dumps(x))
+# print(json.loads(json.dumps(x)))
+#
+# print(json.dumps(x, ensure_ascii=False))
+
+
+# import json
+# from random import choice
+#
+#
+# def gen_person():
+#     name = ''
+#     tel = ''
+#
+#     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+#     num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#
+#     while len(name) != 7:
+#         name += choice(letters)
+#
+#     while len(tel) != 10:
+#         tel += choice(num)
+#
+#     person = {
+#         'name': name,
+#         'tel': tel
+#     }
+#     return person
+#
+#
+# def write_json(person_dict):
+#     try:
+#         data = json.load(open('persons.json'))
+#     except FileNotFoundError:
+#         data = []
+#
+#     data.append(person_dict)
+#     with open('persons.json', 'w') as f:
+#         json.dump(data, f, indent=2)
+#
+#
+# for i in range(5):
+#     write_json(gen_person())
+
+
+import json
+
+
+class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+    def __str__(self):
+        a = ", ".join(map(str, self.marks))
+        return f'Студент: {self.name}: {a}'
+
+
+st1 = Student('Bodnya', [5, 4, 3, 4, 5, 3])
+print(st1)
